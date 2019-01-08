@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
+import data from './data/data-old.csv';
+
 
 
 export default class Chart extends Component {
   render() {
     return (
 
-      <svg viewBox="0 0 900 2400"
-           width="700"
-           height="400">
+      <svg width="800"
+           height="500">
       </svg>
+
     );
   }
 }
+
+      // <svg viewBox=" 0 0 800 500"
+           // width="800"
+           // height="500">
+      // </svg>
