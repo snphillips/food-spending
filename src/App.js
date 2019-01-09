@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import data from './data/data.csv';
+import sample from './data/Sample.js';
 import Chart from './Chart';
-import RechartsChart from './RechartsChart'
+// import RechartsChart from './RechartsChart'
 import ChartHeader from './ChartHeader';
 import Footer from './Footer';
 
@@ -67,6 +68,7 @@ export default class App extends Component {
         console.log(`data:`, data)
         this.setState({data: data})
         console.log("this.state.data:", this.state.data)
+        console.log("hihi", this.state.data[0].valueInflation)
         this.drawChart()
       }).catch(function(error){
       // handle error
@@ -104,6 +106,9 @@ export default class App extends Component {
 
       // define margins for some nice padding on the chart
       const margin = {top: 60, right: 60, bottom: 60, left: 60};
+      // const width = 800;
+      // const height = 500;
+      // put back at end when you want to go responsive
       const width = svg.attr('width');
       const height = svg.attr('height');
       const innerWidth = width - margin.left - margin.right;
@@ -121,7 +126,9 @@ export default class App extends Component {
         // 1) Domain. the min and max value of domain(data)
         // 2) Range. the min and max value of range(the visualization)
         .range([innerHeight, 0])
+        // your version
         .domain([0, d3.max(this.state.data, d => d.valueInflation)])
+        // .domain([0, 100])
 
       chart.append('g')
         .call(d3.axisLeft(yScale))
@@ -129,9 +136,12 @@ export default class App extends Component {
 
       let xScale = d3.scaleBand()
         .range([0, innerWidth])
+        // .range([0, width])
         // map over the data, and display whatever is the date value
+        // your version
         .domain(this.state.data.map (d => d.date))
-        .padding(0.2)
+        // .domain(sample.map (s => s.language))
+        .padding(0.5)
 
      chart.append('g')
       .attr(`transform`, `translate(0, ${innerHeight})`)
@@ -140,18 +150,22 @@ export default class App extends Component {
     // ==================================
     // Drawing the Bars
     // ==================================
-     // chart.selectAll('rect')
-     //  .data(data)
-     //  .enter()
-     //  .append('rect')
+     chart.selectAll('rect')
+      .data(this.state.data)
+      .enter()
+      .append('rect')
      //  // .transition() // a slight delay, see duration()
-     //  // .fill('red')
-     //  .attr('y', d => yScale(d.value))
-     //  // .attr('width', d => xScale(d[this.state.refuseType]))
-     //  .attr('width', d => xScale(d.date))
-     //  // bandwidth is computed width
-     //  // .attr('height', yScale.bandwidth())
+      .attr('x', (d) => xScale(d.date))
+      .attr('y', (d) => yScale(d.valueInflation))
+      .attr('height', (d) => innerHeight - yScale(d.valueInflation))
+      .attr('width', (d) => xScale.bandwidth())
+      // .attr('x', (actual, index, array) => {
+        // xScale(actual.valueInflation))
+      // }
+
      //  // .duration(400)
+
+
 
 
 
