@@ -37,10 +37,10 @@ Chart
   /* To make responsive, in concert with viewBox="0 0 900 2400" */
   /* see svg with viewBox in BarChart.js */
   /*margin: 3rem;*/
-  height: 100%;
-  width: 100%;
+  /*height: 100%;*/
+  /*width: 100%;*/
   /*background-color: pink;*/
-  border: 3px solid pink;
+  /*border: 3px solid pink;*/
 }
 
 .tooltip {

@@ -7,8 +7,8 @@ export default class Chart extends Component {
   render() {
     return (
 
-      <svg width="1300"
-           height="600">
+      <svg width="1100"
+           height="500">
       </svg>
 
     );

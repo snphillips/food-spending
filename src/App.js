@@ -141,7 +141,7 @@ export default class App extends Component {
         // your version
         .domain(this.state.data.map (d => d.date))
         // .domain(sample.map (s => s.language))
-        .padding(0.5)
+        .padding(0.2)
 
      chart.append('g')
       .attr(`transform`, `translate(0, ${innerHeight})`)
@@ -154,16 +154,12 @@ export default class App extends Component {
       .data(this.state.data)
       .enter()
       .append('rect')
-     //  // .transition() // a slight delay, see duration()
       .attr('x', (d) => xScale(d.date))
       .attr('y', (d) => yScale(d.valueInflation))
+      .transition() // a slight delay, see duration()
       .attr('height', (d) => innerHeight - yScale(d.valueInflation))
+      .duration(600)
       .attr('width', (d) => xScale.bandwidth())
-      // .attr('x', (actual, index, array) => {
-        // xScale(actual.valueInflation))
-      // }
-
-     //  // .duration(400)
 
 
 
