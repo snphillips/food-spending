@@ -198,10 +198,11 @@ export default class App extends Component {
     // ==================================
     chart.append('g')
       .attr('class', 'grid')
-      .call(d3.axisLeft()
-      .scale(yScale)
-      .tickSize(-innerWidth, 0, 0)
-      .tickFormat(''))
+      .call(d3.axisLeft().scale(yScale)
+                         .tickSize(-innerWidth, 0, 0)
+                         .tickFormat('')
+                         .ticks(40)
+      )
 
 
 
@@ -216,7 +217,7 @@ export default class App extends Component {
          .attr('y', 12 )
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
-         .text('US dollars adjust for inflation')
+         .text('US dollars adjusted for inflation')
 
     // bottom label
       svg.append('text')

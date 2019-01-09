@@ -68,6 +68,14 @@ line#indicator-line {
   /*display: none;*/
 }
 
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.3;
+}
+.grid path {
+      /*stroke-width: 0;*/
+}
+
 /* ===================================
 Footer
 ====================================== */

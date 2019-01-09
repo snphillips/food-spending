@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Sarah's additions
+HOWTO.txt
+TODO.txt
+data/Sample.js
+
