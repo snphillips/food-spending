@@ -76,9 +76,6 @@ export default class App extends Component {
     }
 
 
-    // ==================================
-    // Setting the Stage
-    // ==================================
 
 
     // ==================================
@@ -91,15 +88,16 @@ export default class App extends Component {
     // ==================================
 
 
-    // ==================================
-    // Drawing the Axes (left, top, bottom)
-    // ==================================
+
 
 
   // **********************************
   // Drawing the Chart function
   // **********************************
 
+    // ==================================
+    // Setting the Stage
+    // ==================================
      drawChart() {
       // select created <svg> element in the HTML file with d3 select
       const svg = d3.select("svg")
@@ -154,13 +152,35 @@ export default class App extends Component {
       .append('rect')
       .attr('x', (d) => xScale(d.date))
       .attr('y', (d) => yScale(d.valueInflation))
-      .transition() // a slight delay, see duration()
+      // .transition() // a slight delay, see duration()
       .attr('height', (d) => innerHeight - yScale(d.valueInflation))
-      .duration(600)
+      // .duration(600)
       .attr('width', (d) => xScale.bandwidth())
 
     // ==================================
-    // Gridlines
+    // Mouseover: make transluscent
+    // note: don't use an arrow function here
+    // ==================================
+      .on("mouseover", function(d) {
+        d3.select(this)
+          .transition()
+          .duration(200)
+          .attr('opacity', .5)
+      })
+
+    // ==================================
+    // Mouseout: make opaque
+    // note: don't use an arrow function for first function
+    // ==================================
+      .on("mouseout", function(d) {
+         d3.select(this)
+           .transition()
+           .duration(200)
+           .attr('opacity', 1)
+      })
+
+    // ==================================
+    // Drawing the Gridlines
     // ==================================
     chart.append('g')
       .attr('class', 'grid')
@@ -169,21 +189,28 @@ export default class App extends Component {
       .tickSize(-innerWidth, 0, 0)
       .tickFormat(''))
 
+
+
     // ==================================
-    // Lables
+    // Adding the Labels
     // ==================================
+    // left side label
       svg.append('text')
-         .attr('x', -(innerHeight / 2) )
+         // adjust up and down
+         .attr('x', -(innerHeight / 1.5) )
+         // adjust side to side
          .attr('y', 12 )
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
          .text('US dollars adjust for inflation')
 
+    // bottom label
       svg.append('text')
          .attr('x', innerWidth / 2)
          .attr('y', height - 5)
          .attr('text-anchor', 'middle')
          .text('month')
+
 
 
 
