@@ -126,9 +126,7 @@ export default class App extends Component {
         // 1) Domain. the min and max value of domain(data)
         // 2) Range. the min and max value of range(the visualization)
         .range([innerHeight, 0])
-        // your version
         .domain([0, d3.max(this.state.data, d => d.valueInflation)])
-        // .domain([0, 100])
 
       chart.append('g')
         .call(d3.axisLeft(yScale))
@@ -160,6 +158,16 @@ export default class App extends Component {
       .attr('height', (d) => innerHeight - yScale(d.valueInflation))
       .duration(600)
       .attr('width', (d) => xScale.bandwidth())
+
+    // ==================================
+    // Gridlines
+    // ==================================
+    chart.append('g')
+      .attr('class', 'grid')
+      .call(d3.axisLeft()
+      .scale(yScale)
+      .tickSize(-innerWidth, 0, 0)
+      .tickFormat(''))
 
 
 
