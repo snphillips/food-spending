@@ -164,8 +164,20 @@ export default class App extends Component {
       .on("mouseover", function(d) {
         d3.select(this)
           .transition()
-          .duration(200)
+          .duration(300)
           .attr('opacity', .5)
+
+        let line = chart.append('line')
+             .attr('id', 'indicator-line')
+             // the start and end points of width of line
+             .attr('x1', 0)
+             .attr('x2', innerWidth)
+             // the start and end points of height line
+             // this.y.animVal.value is the height of the element in
+             // crazy svg world (rememver, svg's (0,0) is upper left.)
+             .attr('y1', this.y.animVal.value)
+             .attr('y2', this.y.animVal.value)
+             .attr('stroke', 'red')
       })
 
     // ==================================
@@ -175,8 +187,10 @@ export default class App extends Component {
       .on("mouseout", function(d) {
          d3.select(this)
            .transition()
-           .duration(200)
+           .duration(300)
            .attr('opacity', 1)
+        // removing the indicator line
+         chart.selectAll('#indicator-line').remove()
       })
 
     // ==================================

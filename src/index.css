@@ -58,6 +58,12 @@ Chart
   fill: brown;
 }
 
+line#indicator-line {
+  stroke: red;
+  stroke-width: 2;
+  stroke-dasharray: 3 6;
+}
+
 .axis--x path {
   /*display: none;*/
 }
