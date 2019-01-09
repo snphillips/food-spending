@@ -1,0 +1,1236 @@
+date,type,value
+1/1/14,groceries,32.46
+1/2/14,groceries,3.78
+1/2/14,groceries,8
+1/5/14,lunch out,15
+1/6/14,groceries,31.88
+1/10/14,dinner out,21
+1/12/14,groceries,21.74
+1/13/14,groceries,14.47
+1/17/14,groceries,9.6
+1/19/14,dinner out,33
+1/19/14,groceries,29.97
+1/21/14,dinner out,10
+1/23/14,breakfast out,12.76
+1/24/14,breakfast out,12.76
+1/24/14,dinner out,20
+1/25/14,coffee,4.96
+1/25/14,lunch out,8.49
+1/27/14,groceries,17.72
+1/29/14,dinner out,7.5
+1/30/14,groceries,31.66
+2/1/14,dinner out,15
+2/2/14,dinner out,15
+2/2/14,groceries,11
+2/2/14,groceries,11.85
+2/3/14,groceries,40.26
+2/6/14,groceries,12.87
+2/6/14,groceries,16.87
+2/8/14,groceries,18.74
+2/9/14,groceries,15.95
+2/11/14,groceries,10.17
+2/12/14,groceries,11.69
+2/14/14,groceries,3
+2/14/14,lunch out,7
+2/15/14,groceries,30.01
+2/16/14,lunch out,8.17
+2/16/14,snack out,3
+2/17/14,groceries,6.97
+2/19/14,groceries,26.48
+2/21/14,groceries,32.78
+2/21/14,lunch out,8.5
+2/23/14,groceries,47.29
+2/23/14,groceries,3.37
+2/23/14,snack out,3.16
+2/28/14,groceries,26.94
+3/1/14,groceries,7.87
+3/3/14,groceries,29.31
+3/4/14,groceries,43.11
+3/5/14,groceries,27.55
+3/5/14,groceries,34
+3/5/14,groceries,2.38
+3/8/14,dinner out,22
+3/13/14,groceries,14.5
+3/14/14,dinner out,25
+3/14/14,groceries,14.78
+3/15/14,groceries,15.52
+3/21/14,groceries,44.01
+3/21/14,lunch out,9.5
+3/22/14,dinner out,25
+3/23/14,groceries,25.07
+3/25/14,groceries,34.07
+3/26/14,groceries,37.47
+3/27/14,groceries,43.4
+3/27/14,groceries,38.73
+3/28/14,groceries,56.48
+3/28/14,groceries,22.91
+3/28/14,groceries,8.68
+3/28/14,groceries,20.65
+3/28/14,groceries,11.34
+3/28/14,groceries,16.52
+3/28/14,groceries,4.31
+3/30/14,lunch out,8.62
+4/3/14,snack out,6
+4/5/14,groceries,8.5
+4/5/14,groceries,10.37
+4/7/14,dinner out,17
+4/7/14,groceries,21.26
+4/7/14,groceries,14.9
+4/10/14,lunch out,9.5
+4/13/14,dinner out,15
+4/16/14,groceries,9.1
+4/18/14,groceries,15.58
+4/18/14,groceries,28.95
+4/20/14,groceries,6
+4/24/14,groceries,41
+4/26/14,dinner out,79
+4/26/14,groceries,21.55
+4/27/14,groceries,28.34
+4/29/14,groceries,11.87
+5/4/14,groceries,23.81
+5/9/14,breakfast out,30
+5/11/14,dinner out,50.32
+5/12/14,dinner out,10
+5/13/14,dinner out,14
+5/14/14,dinner out,13.3
+5/16/14,snack out,5.58
+5/18/14,dinner out,15
+5/19/14,groceries,8.03
+5/19/14,groceries,28.67
+5/22/14,snack out,2.75
+5/23/14,groceries,9
+5/24/14,dinner out,20
+5/25/14,groceries,17.17
+5/26/14,groceries,8
+5/26/14,groceries,1.88
+5/26/14,groceries,12.17
+5/29/14,groceries,28.46
+6/1/14,groceries,37.06
+6/2/14,groceries,34.1
+6/2/14,groceries,8.5
+6/2/14,snack out,5
+6/4/14,groceries,16.35
+6/5/14,dinner out,13.23
+6/5/14,groceries,13
+6/8/14,snack out,4.5
+6/8/14,snack out,4.5
+6/9/14,groceries,10.82
+6/11/14,groceries,15.86
+6/12/14,dinner out,36.3
+6/14/14,snack out,8
+6/15/14,groceries,16.07
+6/15/14,groceries,27.49
+6/16/14,groceries,13.56
+6/16/14,groceries,7.28
+6/16/14,groceries,9.35
+6/21/14,snack out,1.5
+6/22/14,groceries,44.49
+6/26/14,groceries,36.33
+6/26/14,groceries,12.23
+6/27/14,groceries,23.53
+6/28/14,dinner out,25
+6/29/14,groceries,17.12
+6/30/14,groceries,14.77
+7/2/14,snack out,1.07
+7/3/14,dinner out,14
+7/5/14,groceries,7.27
+7/7/14,groceries,12.46
+7/7/14,groceries,12.03
+7/11/14,groceries,22.8
+7/15/14,groceries,0.78
+7/16/14,groceries,4.58
+7/17/14,groceries,7.04
+7/17/14,groceries,9.58
+7/25/14,groceries,22.68
+7/26/14,lunch out,16
+7/28/14,groceries,20.05
+7/28/14,groceries,20.05
+7/29/14,groceries,15.11
+7/29/14,groceries,3.29
+7/30/14,dinner out,45
+7/31/14,groceries,15.8
+7/31/14,groceries,8.3
+8/2/14,groceries,19.18
+8/2/14,groceries,12.76
+8/3/14,groceries,33.1
+8/4/14,groceries,6.77
+8/4/14,groceries,26.7
+8/5/14,groceries,12.27
+8/5/14,lunch out,8
+8/8/14,groceries,9
+8/9/14,coffee,2
+8/11/14,groceries,19
+8/12/14,groceries,15.96
+8/12/14,groceries,5
+8/12/14,groceries,5.5
+8/13/14,groceries,5.67
+8/14/14,groceries,8.89
+8/14/14,groceries,43.5
+8/15/14,groceries,7.68
+8/15/14,groceries,29.13
+8/17/14,groceries,4
+8/19/14,groceries,38.77
+8/20/14,dinner out,8.98
+8/22/14,groceries,33.93
+8/24/14,groceries,12.97
+8/28/14,groceries,18.76
+8/29/14,groceries,55
+8/29/14,lunch out,8
+8/30/14,dinner out,12
+8/31/14,dinner out,11.5
+9/1/14,breakfast out,10
+9/2/14,groceries,33.66
+9/3/14,groceries,6.51
+9/4/14,groceries,21.74
+9/5/14,groceries,7.74
+9/6/14,groceries,17.59
+9/11/14,groceries,25.09
+9/13/14,dinner out,10
+9/13/14,groceries,22.55
+9/15/14,groceries,16.35
+9/15/14,groceries,5.1
+9/17/14,groceries,37.68
+9/20/14,groceries,3.69
+9/20/14,lunch out,16
+9/22/14,groceries,20.34
+9/24/14,dinner out,40
+9/24/14,groceries,19.38
+9/24/14,groceries,35.24
+9/30/14,lunch out,9
+10/1/14,groceries,15.92
+10/2/14,lunch out,9
+10/3/14,groceries,11.57
+10/3/14,groceries,20.02
+10/4/14,groceries,29.78
+10/4/14,groceries,7.59
+10/5/14,groceries,12.39
+10/8/14,groceries,4.81
+10/10/14,groceries,10
+10/14/14,lunch out,9
+10/15/14,groceries,16.58
+10/15/14,lunch out,4.25
+10/16/14,groceries,21.41
+10/17/14,groceries,8
+10/23/14,groceries,7.6
+10/23/14,groceries,22.75
+10/24/14,groceries,14
+10/26/14,dinner out,40
+10/26/14,groceries,20.89
+10/29/14,groceries,4.64
+11/1/14,groceries,21.07
+11/1/14,groceries,3.78
+11/2/14,groceries,4.89
+11/3/14,dinner out,15
+11/4/14,groceries,7.87
+11/7/14,coffee,4
+11/7/14,dinner out,25
+11/8/14,coffee,5.6
+11/8/14,lunch out,15
+11/11/14,groceries,28.63
+11/13/14,groceries,17.07
+11/13/14,groceries,34.35
+11/15/14,groceries,21.96
+11/15/14,groceries,9.88
+11/20/14,groceries,22.66
+11/21/14,groceries,32.4
+11/25/14,groceries,39.21
+11/26/14,groceries,26.33
+11/27/14,groceries,37.3
+11/29/14,groceries,20.56
+11/30/14,groceries,6.4
+12/1/14,lunch out,9
+12/7/14,coffee,1.09
+12/7/14,dinner out,11
+12/8/14,groceries,35.52
+12/8/14,groceries,35.52
+12/9/14,groceries,16.66
+12/13/14,groceries,15.67
+12/14/14,groceries,25.08
+12/21/14,dinner out,20
+12/21/14,groceries,6
+12/22/14,dinner out,5
+12/22/14,lunch out,15
+12/23/14,coffee,3
+12/23/14,lunch out,12
+12/24/14,coffee,3.35
+12/29/14,dinner out,5
+12/29/14,groceries,2.1
+12/29/14,lunch out,7
+12/30/14,groceries,30
+12/30/14,groceries,9.38
+12/31/14,groceries,10
+1/1/15,dinner out,15
+1/3/15,groceries,7.69
+1/3/15,groceries,7
+1/5/15,dinner out,23.65
+1/5/15,lunch out,10.93
+1/6/15,groceries,102.89
+1/6/15,lunch out,13
+1/7/15,groceries,12.87
+1/8/15,groceries,17
+1/9/15,groceries,24.13
+1/11/15,dinner out,4.38
+1/11/15,groceries,11.37
+1/13/15,dinner out,23
+1/14/15,dinner out,7
+1/15/15,dinner out,17.5
+1/16/15,dinner out,90
+1/16/15,groceries,21.64
+1/18/15,groceries,8.48
+1/22/15,groceries,20
+1/26/15,groceries,5.33
+1/27/15,lunch out,12
+1/28/15,groceries,2.5
+1/31/15,groceries,9
+2/2/15,groceries,46.5
+2/2/15,groceries,1.99
+2/3/15,groceries,6.98
+2/5/15,lunch out,8
+2/6/15,groceries,18
+2/7/15,groceries,34.22
+2/9/15,coffee,2.75
+2/10/15,groceries,12.38
+2/10/15,groceries,3.99
+2/11/15,groceries,34.53
+2/11/15,groceries,5.99
+2/13/15,groceries,32.01
+2/13/15,groceries,1.99
+2/14/15,groceries,26.25
+2/14/15,groceries,8.23
+2/17/15,coffee,2.75
+2/19/15,groceries,28.53
+2/20/15,dinner out,20.5
+2/22/15,groceries,7.59
+2/23/15,groceries,9
+2/25/15,groceries,15.8
+2/27/15,groceries,30.63
+2/28/15,dinner out,20
+2/28/15,groceries,39.4
+3/2/15,snack out,6.3
+3/5/15,groceries,21.28
+3/5/15,groceries,23
+3/6/15,groceries,19.29
+3/8/15,groceries,12.37
+3/9/15,dinner out,15
+3/10/15,dinner out,14
+3/11/15,groceries,26.95
+3/14/15,dinner out,15
+3/14/15,groceries,35
+3/15/15,groceries,12.03
+3/16/15,groceries,14.45
+3/20/15,dinner out,14
+3/21/15,groceries,0.38
+3/21/15,groceries,20.57
+3/21/15,groceries,38
+3/23/15,lunch out,9.67
+3/27/15,groceries,12.66
+3/27/15,groceries,36.17
+3/28/15,groceries,4.98
+3/28/15,groceries,31.85
+3/28/15,groceries,13.03
+3/28/15,groceries,21.43
+3/28/15,groceries,20
+3/28/15,groceries,4.5
+4/4/15,groceries,17
+4/4/15,groceries,29
+4/5/15,groceries,9.97
+4/7/15,groceries,26.06
+4/11/15,groceries,19.22
+4/11/15,groceries,4.18
+4/12/15,groceries,19.06
+4/13/15,groceries,14.29
+4/16/15,dinner out,6
+4/18/15,snack out,5
+4/19/15,groceries,26.23
+4/19/15,groceries,7.27
+4/20/15,groceries,6.8
+4/22/15,groceries,9.9
+4/23/15,groceries,2
+4/24/15,groceries,39.26
+4/25/15,groceries,52.76
+4/26/15,groceries,6.76
+4/28/15,groceries,3
+4/28/15,groceries,2.29
+4/29/15,groceries,4.8
+4/30/15,groceries,30.22
+5/1/15,groceries,8
+5/1/15,groceries,26.54
+5/3/15,groceries,6.24
+5/4/15,groceries,11
+5/5/15,dinner out,7.5
+5/6/15,groceries,6
+5/6/15,groceries,22
+5/8/15,groceries,17.21
+5/9/15,groceries,24.63
+5/13/15,groceries,6.57
+5/15/15,groceries,4.07
+5/16/15,groceries,21.97
+5/17/15,dinner out,10
+5/17/15,lunch out,17.53
+5/23/15,dinner out,20
+5/23/15,groceries,12.4
+5/24/15,groceries,27.26
+5/31/15,groceries,25.55
+6/1/15,groceries,12.69
+6/5/15,groceries,26.22
+6/6/15,groceries,10.45
+6/7/15,dinner out,25
+6/8/15,lunch out,18
+6/9/15,groceries,12.72
+6/10/15,groceries,35
+6/13/15,groceries,8.29
+6/16/15,groceries,3
+6/19/15,groceries,17.28
+6/21/15,groceries,11.66
+6/21/15,snack out,8
+6/22/15,lunch out,15
+6/24/15,groceries,23.52
+6/24/15,groceries,1.99
+6/26/15,lunch out,6.69
+6/28/15,groceries,27.59
+6/30/15,dinner out,20
+7/1/15,groceries,30.29
+7/3/15,snack out,6.3
+7/4/15,groceries,25.2
+7/5/15,groceries,13.8
+7/7/15,groceries,25.53
+7/8/15,groceries,16.32
+7/9/15,groceries,32
+7/11/15,groceries,6.46
+7/11/15,groceries,4
+7/11/15,groceries,2
+7/13/15,groceries,36.11
+7/14/15,groceries,2.89
+7/17/15,groceries,29.89
+7/19/15,groceries,10.66
+7/20/15,dinner out,25
+7/20/15,groceries,4
+7/20/15,lunch out,8.62
+7/22/15,groceries,3
+7/22/15,groceries,16.67
+7/22/15,groceries,9
+7/23/15,groceries,21.44
+7/23/15,groceries,31.47
+7/25/15,groceries,3.3
+7/25/15,groceries,9.96
+7/25/15,groceries,9.96
+7/30/15,groceries,8
+7/31/15,groceries,7.37
+8/3/15,groceries,24.64
+8/8/15,groceries,22.93
+8/10/15,dinner out,8
+8/10/15,groceries,12.17
+8/10/15,lunch out,4.75
+8/12/15,groceries,16.35
+8/12/15,groceries,17.59
+8/14/15,groceries,20
+8/14/15,groceries,8
+8/18/15,groceries,11.5
+8/19/15,groceries,13
+8/19/15,groceries,18.79
+8/23/15,groceries,11.76
+8/26/15,groceries,15
+8/26/15,dinner out,9
+8/28/15,dinner out,33
+8/29/15,groceries,14.94
+9/1/15,groceries,13.5
+9/1/15,groceries,11.17
+9/6/15,groceries,20.65
+9/7/15,dinner out,11.76
+9/7/15,groceries,7
+9/10/15,groceries,47
+9/12/15,lunch out,8.3
+9/14/15,groceries,22.03
+9/14/15,groceries,34.51
+9/15/15,groceries,13
+9/16/15,groceries,43.69
+9/18/15,groceries,2
+9/19/15,groceries,23.24
+9/21/15,groceries,2.29
+9/22/15,groceries,10.36
+9/23/15,dinner out,30
+9/24/15,dinner out,12.52
+9/24/15,groceries,2
+9/25/15,groceries,2.76
+9/25/15,groceries,5
+9/25/15,groceries,7.28
+9/26/15,groceries,32.07
+9/29/15,groceries,2.99
+9/29/15,groceries,9.86
+9/29/15,groceries,4.68
+9/29/15,groceries,6.4
+9/30/15,groceries,34.34
+10/1/15,groceries,2.3
+10/4/15,groceries,2.34
+10/6/15,groceries,9.67
+10/8/15,groceries,31.51
+10/13/15,groceries,8
+10/13/15,groceries,2.5
+10/14/15,groceries,9.67
+10/15/15,groceries,15.92
+10/18/15,dinner out,6.55
+10/19/15,lunch out,9.67
+10/21/15,groceries,11.04
+10/21/15,groceries,51.07
+10/27/15,groceries,28.41
+10/29/15,groceries,21.03
+10/29/15,groceries,4.89
+10/30/15,groceries,18.06
+11/1/15,groceries,30.05
+11/2/15,groceries,7.28
+11/3/15,groceries,19.48
+11/3/15,groceries,27.47
+11/3/15,lunch out,4.25
+11/4/15,groceries,36.11
+11/6/15,groceries,30.44
+11/7/15,groceries,21.02
+11/11/15,groceries,4.5
+11/12/15,dinner out,3.62
+11/14/15,groceries,19.81
+11/15/15,groceries,24.97
+11/18/15,groceries,16.5
+11/19/15,groceries,18.55
+11/21/15,groceries,38
+11/22/15,groceries,9.67
+11/25/15,groceries,45.43
+11/27/15,groceries,14.87
+11/28/15,dinner out,30
+11/29/15,dinner out,35
+11/30/15,dinner out,15
+12/3/15,groceries,23.12
+12/4/15,groceries,33.27
+12/5/15,groceries,4.89
+12/6/15,lunch out,5.37
+12/9/15,groceries,26.95
+12/11/15,groceries,29.81
+12/13/15,groceries,4.68
+12/18/15,groceries,18.75
+12/19/15,groceries,7.33
+12/24/15,lunch out,15
+12/26/15,dinner out,26
+12/26/15,groceries,9.51
+12/30/15,groceries,26.52
+1/2/16,groceries,5.36
+1/2/16,groceries,26.77
+1/4/16,groceries,14.74
+1/5/16,groceries,22.6
+1/10/16,groceries,24.66
+1/11/16,groceries,9.88
+1/13/16,groceries,10.34
+1/13/16,groceries,4.68
+1/15/16,groceries,5.1
+1/16/16,dinner out,84
+1/17/16,groceries,18.97
+1/20/16,groceries,12.38
+1/27/16,groceries,5.42
+1/28/16,dinner out,30
+1/29/16,groceries,10.06
+1/31/16,lunch out,40
+2/2/16,groceries,23.86
+2/2/16,groceriesf,26.57
+2/3/16,groceries,26
+2/3/16,lunch out,13
+2/3/16,snack out,16
+2/5/16,groceries,4.89
+2/5/16,groceries,26.25
+2/11/16,groceries,27.2
+2/16/16,groceries,38.41
+2/16/16,groceries,18
+2/18/16,groceries,7.5
+2/19/16,groceries,23.3
+2/20/16,groceries,29.23
+2/22/16,groceries,9.88
+2/26/16,groceries,30.5
+2/27/16,groceries,10.09
+2/29/16,groceries,42.41
+3/2/16,groceries,4.68
+3/3/16,groceries,38.25
+3/4/16,groceries,20.38
+3/4/16,lunch out,17
+3/11/16,groceries,36.81
+3/13/16,groceries,20
+3/21/16,groceries,2.99
+3/21/16,groceries,42.47
+3/22/16,groceries,5.43
+3/22/16,groceries,30.73
+3/24/16,groceries,45.83
+3/24/16,groceries,45.83
+3/25/16,groceries,57.56
+3/25/16,groceries,5.98
+3/26/16,groceries,69.15
+3/26/16,groceries,29.04
+3/29/16,groceries,2.59
+3/31/16,groceries,4.68
+4/2/16,groceries,2.74
+4/4/16,lunch out,9.67
+4/5/16,groceries,28.54
+4/5/16,lunch out,9.67
+4/8/16,groceries,11.5
+4/9/16,groceries,43.42
+4/10/16,groceries,6.31
+4/11/16,groceries,12
+4/11/16,groceries,31.25
+4/12/16,groceries,7.02
+4/13/16,groceries,8.5
+4/13/16,groceries,8.33
+4/13/16,groceries,15.86
+4/14/16,groceries,4.68
+4/17/16,groceries,28.73
+4/17/16,groceries,8
+4/20/16,groceries,41
+4/23/16,groceries,18.49
+4/23/16,snack out,4.99
+4/24/16,groceries,0.88
+4/27/16,groceries,28.06
+4/28/16,groceries,37.78
+4/29/16,dinner out,25
+4/30/16,coffee,2.5
+5/1/16,groceries,48.39
+5/2/16,groceries,12.5
+5/2/16,groceries,12.93
+5/4/16,groceries,25
+5/7/16,groceries,42.93
+5/8/16,groceries,4.7
+5/10/16,groceries,37.35
+5/14/16,groceries,12
+5/16/16,groceries,15
+5/18/16,groceries,20.78
+5/20/16,groceries,10
+5/22/16,groceries,2.59
+5/23/16,groceries,19.02
+5/24/16,groceries,3
+5/28/16,groceries,2
+5/29/16,groceries,10.06
+5/29/16,groceries,47.43
+6/2/16,snack out,3.58
+6/4/16,dinner out,7.17
+6/4/16,groceries,14.09
+6/4/16,groceries,23.59
+6/6/16,groceries,32.62
+6/6/16,lunch out,9.76
+6/8/16,groceries,5.25
+6/11/16,groceries,5.28
+6/12/16,groceries,31.26
+6/13/16,groceries,7.28
+6/23/16,groceries,17.68
+6/23/16,groceries,42.91
+6/24/16,groceries,7
+6/26/16,groceries,11.87
+6/27/16,groceries,16.72
+6/30/16,groceries,29.57
+7/1/16,groceries,10.3
+7/1/16,groceries,3.85
+7/2/16,dinner out,7
+7/2/16,dinner out,4.5
+7/3/16,groceries,10.06
+7/3/16,groceries,20.47
+7/5/16,groceries,19.74
+7/5/16,groceries,22.75
+7/6/16,dinner out,25
+7/8/16,groceries,22.05
+7/10/16,snack out,4
+7/13/16,groceries,37.85
+7/15/16,groceries,3.84
+7/15/16,groceries,4.79
+7/17/16,dinner out,55
+7/20/16,groceries,30.32
+7/21/16,snack out,1.09
+7/21/16,snack out,0.75
+7/22/16,groceries,12.43
+7/22/16,lunch out,5.5
+7/24/16,snack out,10
+7/26/16,groceries,41.28
+7/29/16,snack out,5
+7/30/16,lunch out,38
+7/31/16,snack out,4.44
+8/6/16,dinner out,16.24
+8/6/16,groceries,2
+8/6/16,groceries,28
+8/7/16,groceries,13.01
+8/9/16,groceries,14.97
+8/9/16,groceries,15.73
+8/11/16,dinner out,7.55
+8/11/16,groceries,2.39
+8/12/16,groceries,17.45
+8/12/16,groceries,20.55
+8/13/16,groceries,5.89
+8/13/16,snack out,5
+8/16/16,groceries,37.5
+8/16/16,groceries,11.48
+8/22/16,groceries,19.3
+8/26/16,groceries,11.44
+9/1/16,dinner out,17.3
+9/1/16,groceries,11.2
+9/2/16,groceries,11.05
+9/4/16,coffee,3.27
+9/4/16,groceries,16.07
+9/5/16,groceries,3.29
+9/5/16,groceries,15.58
+9/6/16,groceries,21.65
+9/8/16,dinner out,8.42
+9/8/16,dinner out,8.42
+9/12/16,lunch out,3.81
+9/14/16,groceries,17.15
+9/15/16,groceries,46.42
+9/15/16,groceries,10
+9/19/16,lunch out,3.81
+9/20/16,groceries,15.51
+9/21/16,groceries,5
+9/21/16,lunch out,3.81
+9/22/16,groceries,33.53
+9/25/16,groceries,8.45
+9/26/16,lunch out,3.81
+9/28/16,groceries,29.86
+9/29/16,groceries,12.24
+9/30/16,groceries,5.28
+10/3/16,groceries,17.97
+10/4/16,breakfast out,8.89
+10/6/16,groceries,13
+10/7/16,breakfast out,7.03
+10/7/16,groceries,4.89
+10/7/16,groceries,14.82
+10/8/16,groceries,7.67
+10/11/16,groceries,23.19
+10/11/16,lunch out,3.81
+10/12/16,groceries,48.58
+10/13/16,groceries,14.85
+10/15/16,dinner out,17.31
+10/15/16,groceries,39.09
+10/19/16,lunch out,3.81
+10/20/16,groceries,18.79
+10/20/16,groceries,2.49
+10/20/16,groceries,11.46
+10/22/16,groceries,27.86
+10/23/16,groceries,8.88
+10/24/16,dinner out,13
+10/25/16,groceries,23.4
+10/28/16,groceries,19
+10/29/16,snack out,1.99
+10/30/16,groceries,10
+10/31/16,groceries,10.87
+11/4/16,groceries,33.82
+11/5/16,groceries,16.14
+11/6/16,groceries,9.67
+11/11/16,groceries,19.55
+11/12/16,groceries,38.31
+11/13/16,groceries,24.5
+11/13/16,groceries,24.5
+11/13/16,groceries,10
+11/19/16,groceries,9.67
+11/20/16,groceries,4
+11/21/16,groceries,18.17
+11/22/16,groceries,16.2
+11/22/16,groceries,35.6
+11/23/16,groceries,36.4
+11/24/16,booze & red wine,28.29
+11/30/16,groceries,9.57
+12/4/16,groceries,37.14
+12/7/16,groceries,8.58
+12/7/16,groceries,18.88
+12/9/16,groceries,12.46
+12/9/16,groceries,26.5
+12/10/16,groceries,15.95
+12/15/16,dinner out,20
+12/15/16,dinner out,42
+12/16/16,groceries,22.88
+12/20/16,groceries,2
+12/20/16,groceries,8.88
+12/29/16,groceries,31.81
+12/29/16,groceries,19.6
+12/29/16,groceries,10.5
+12/30/16,groceries,41.02
+1/1/17,groceries,8.23
+1/2/17,groceries,3.8
+1/3/17,groceries,9.88
+1/4/17,groceries,27.16
+1/9/17,groceries,3.54
+1/14/17,groceries,12.83
+1/14/17,groceries,41.14
+1/18/17,groceries,20.12
+1/19/17,groceries,13
+1/19/17,lunch out,3.81
+1/21/17,breakfast out,35
+1/21/17,snack out,6.5
+1/22/17,groceries,8.38
+1/23/17,groceries,26.18
+1/24/17,groceries,18.95
+1/28/17,coffee,5.74
+1/28/17,snack out,5.74
+2/1/17,groceries,12.68
+2/2/17,groceries,51
+2/2/17,groceries,42.58
+2/8/17,dinner out,8
+2/8/17,lunch out,3.81
+2/13/17,groceries,22.48
+2/13/17,groceries,6.88
+2/14/17,groceries,17.81
+2/15/17,groceries,5.85
+2/18/17,snack out,5
+2/20/17,groceries,11.42
+2/21/17,groceries,19.74
+2/22/17,groceries,22.22
+2/24/17,groceries,34.87
+2/25/17,lunch out,42.2
+2/26/17,groceries,14.75
+2/28/17,groceries,8.07
+2/28/17,lunch out,7.53
+3/2/17,coffee,4.36
+3/3/17,coffee,3.31
+3/3/17,groceries,5
+3/4/17,groceries,13.76
+3/4/17,lunch out,30
+3/9/17,dinner out,50
+3/10/17,groceries,97.08
+3/13/17,dinner out,10.76
+3/13/17,lunch out,10.6
+3/16/17,lunch out,15
+3/17/17,dinner out,115
+3/17/17,snack out,16.96
+3/18/17,dinner out,6.3
+3/18/17,snack out,3.24
+3/19/17,groceries,60.77
+3/22/17,groceries,61.08
+3/23/17,groceries,36.26
+3/24/17,dinner out,11.39
+3/24/17,groceries,10.36
+3/28/17,groceries,37.3
+3/29/17,groceries,10.7
+3/30/17,groceries,80.44
+3/31/17,groceries,50.08
+3/31/17,groceries,4.69
+4/1/17,groceries,48.6
+4/2/17,dinner out,10
+4/4/17,groceries,4
+4/5/17,groceries,9.98
+4/5/17,groceries,4
+4/9/17,breakfast out,26.23
+4/10/17,groceries,4.49
+4/11/17,groceries,13.66
+4/14/17,groceries,10.39
+4/16/17,snack out,5.67
+4/17/17,groceries,34.29
+4/17/17,groceries,7.35
+4/19/17,dinner out,10
+4/19/17,groceries,27.84
+4/21/17,groceries,36.86
+4/21/17,lunch out,8.5
+4/22/17,groceries,12.28
+4/23/17,dinner out,25
+4/24/17,groceries,14.43
+4/25/17,lunch out,5.43
+4/27/17,groceries,39.05
+4/29/17,dinner out,28
+5/1/17,groceries,8.16
+5/1/17,groceries,21.56
+5/2/17,groceries,10
+5/6/17,breakfast out,24
+5/6/17,groceries,10
+5/6/17,groceries,9.14
+5/6/17,groceries,13.26
+5/6/17,lunch out,15
+5/7/17,groceries,5
+5/8/17,coffee,5
+5/8/17,lunch out,9.85
+5/9/17,dinner out,8
+5/10/17,breakfast out,5.54
+5/10/17,groceries,7.93
+5/14/17,breakfast out,15.75
+5/15/17,groceries,14.31
+5/17/17,dinner out,33.13
+5/17/17,groceries,34.46
+5/23/17,groceries,45.89
+5/23/17,groceries,25.46
+5/24/17,groceries,1.19
+5/24/17,groceries,11.36
+5/25/17,groceries,7.78
+5/25/17,lunch out,6.51
+5/26/17,groceries,30.96
+5/27/17,groceries,5.69
+5/27/17,groceries,1.99
+5/29/17,groceries,3.39
+6/1/17,groceries,40.83
+6/4/17,groceries,17.26
+6/4/17,groceries,4.24
+6/4/17,lunch out,12.44
+6/6/17,groceries,18
+6/7/17,groceries,15.68
+6/7/17,groceries,26.48
+6/9/17,groceries,4.07
+6/12/17,lunch out,13.25
+6/14/17,groceries,8.58
+6/15/17,lunch out,6.51
+6/16/17,groceries,4.79
+6/18/17,dinner out,25
+6/18/17,snack out,5.5
+6/20/17,groceries,18.92
+6/20/17,groceries,20.43
+6/23/17,groceries,14.72
+6/23/17,groceries,2.22
+6/24/17,groceries,8.27
+6/25/17,groceries,17.92
+6/27/17,groceries,16.95
+6/30/17,groceries,11.78
+7/1/17,groceries,3.49
+7/1/17,groceries,10.55
+7/3/17,snack out,6
+7/4/17,groceries,23.16
+7/7/17,groceries,33.59
+7/8/17,groceries,7.46
+7/8/17,lunch out,16
+7/9/17,dinner out,24
+7/10/17,groceries,8
+7/10/17,lunch out,6.51
+7/12/17,groceries,19.11
+7/12/17,groceries,7.04
+7/13/17,groceries,66.18
+7/13/17,groceries,66.18
+7/16/17,lunch out,20
+7/18/17,groceries,5
+7/19/17,coffee,5
+7/19/17,lunch out,8.95
+7/20/17,groceries,15
+7/20/17,groceries,8
+7/21/17,lunch out,6.51
+7/23/17,groceries,20.14
+7/23/17,groceries,10
+7/23/17,snack out,0.54
+7/30/17,groceries,63.04
+7/30/17,groceries,63.04
+7/31/17,groceries,4.68
+8/2/17,groceries,14.97
+8/9/17,lunch out,6.51
+8/12/17,groceries,26.45
+8/13/17,groceries,7.3
+8/14/17,lunch out,10.76
+8/15/17,groceries,9.83
+8/17/17,groceries,25.92
+8/19/17,groceries,53.91
+8/21/17,groceries,11.46
+8/22/17,groceries,3.39
+8/22/17,snack out,1.4
+8/30/17,snack out,6.89
+8/31/17,groceries,7.64
+8/31/17,groceries,8.98
+9/2/17,groceries,28.98
+9/2/17,groceries,0.9
+9/4/17,groceries,17.96
+9/5/17,groceries,4.86
+9/7/17,groceries,15.65
+9/8/17,groceries,6.42
+9/8/17,groceries,6.53
+9/12/17,groceries,16.5
+9/12/17,groceries,11.62
+9/12/17,groceries,7.47
+9/15/17,groceries,16.12
+9/17/17,dinner out,7
+9/17/17,groceries,9.98
+9/18/17,groceries,18.92
+9/19/17,groceries,7.89
+9/21/17,groceries,8.05
+9/26/17,groceries,10.12
+9/27/17,groceries,33.87
+9/30/17,groceries,13.24
+9/30/17,snack out,7.5
+10/1/17,groceries,6.36
+10/1/17,groceries,6.3
+10/1/17,groceries,9.98
+10/2/17,groceries,42.23
+10/4/17,dinner out,21.55
+10/4/17,groceries,23.18
+10/4/17,groceries,34.6
+10/4/17,groceries,20
+10/6/17,groceries,16.61
+10/10/17,lunch out,3.26
+10/12/17,groceries,41.88
+10/15/17,groceries,10.96
+10/16/17,lunch out,3.26
+10/16/17,lunch out,9.6
+10/18/17,groceries,21.56
+10/19/17,groceries,4.68
+10/22/17,snack out,2.53
+10/23/17,groceries,14.27
+10/23/17,groceries,7.72
+10/26/17,groceries,16.16
+10/27/17,groceries,10.26
+10/31/17,groceries,25.42
+10/31/17,lunch out,3.26
+11/2/17,groceries,42.23
+11/2/17,lunch out,15.39
+11/4/17,groceries,4.99
+11/4/17,lunch out,5.44
+11/5/17,coffee,4.36
+11/5/17,groceries,21.67
+11/9/17,groceries,6.13
+11/13/17,groceries,19.34
+11/14/17,groceries,3.34
+11/14/17,groceries,37.47
+11/15/17,groceries,19.02
+11/19/17,groceries,22.72
+11/20/17,groceries,14.5
+11/25/17,booze & red wine,28
+11/26/17,groceries,40.03
+11/29/17,groceries,5
+12/1/17,snack out,5.71
+12/2/17,lunch out,31.36
+12/4/17,groceries,33
+12/4/17,groceries,8
+12/4/17,groceries,8.71
+12/5/17,dinner out,25
+12/6/17,groceries,22.84
+12/7/17,groceries,16.96
+12/12/17,groceries,1.99
+12/12/17,groceries,7
+12/13/17,groceries,42
+12/16/17,groceries,1.2
+12/20/17,groceries,27.75
+12/23/17,groceries,3
+12/27/17,dinner out,20
+12/27/17,groceries,8.68
+12/30/17,dinner out,30.35
+12/30/17,groceries,34.83
+12/30/17,groceries,6.93
+1/1/18,groceries,5.91
+1/2/18,groceries,28.52
+1/3/18,groceries,36.97
+1/5/18,lunch out,6.51
+1/7/18,groceries,22.94
+1/9/18,groceries,22.24
+1/13/18,groceries,20.17
+1/14/18,groceries,3.89
+1/18/18,groceries,25.82
+1/20/18,groceries,3.46
+1/22/18,groceries,22.01
+1/25/18,groceries,60.78
+1/28/18,groceries,34
+1/29/18,lunch out,25
+2/1/18,groceries,46.45
+2/2/18,groceries,26.66
+2/2/18,lunch out,6.51
+2/4/18,groceries,24.21
+2/5/18,lunch out,4.6
+2/7/18,groceries,24.2
+2/8/18,breakfast out,4.67
+2/10/18,dinner out,60
+2/10/18,groceries,19.98
+2/10/18,lunch out,8.67
+2/11/18,dinner out,30
+2/11/18,lunch out,7.03
+2/12/18,groceries,5.8
+2/14/18,groceries,26.15
+2/20/18,breakfast out,7.28
+2/20/18,groceries,13.55
+2/21/18,groceries,12.05
+2/21/18,lunch out,10.75
+2/22/18,groceries,12.96
+2/22/18,lunch out,19.68
+2/23/18,groceries,15
+2/23/18,groceries,22.92
+2/24/18,coffee,5.75
+2/25/18,dinner out,14.7
+2/27/18,breakfast out,9.52
+2/27/18,groceries,9.76
+2/27/18,lunch out,39
+3/1/18,dinner out,25
+3/1/18,groceries,33.58
+3/3/18,dinner out,36
+3/4/18,groceries,2.59
+3/5/18,dinner out,41.57
+3/6/18,groceries,34.91
+3/9/18,groceries,50.04
+3/9/18,groceries,7.5
+3/9/18,snack out,8
+3/10/18,groceries,41.38
+3/11/18,groceries,29.03
+3/12/18,lunch out,4
+3/14/18,lunch out,5.32
+3/14/18,lunch out,11.97
+3/17/18,groceries,34.89
+3/18/18,groceries,8
+3/19/18,lunch out,6
+3/23/18,groceries,28.91
+3/24/18,groceries,17.73
+3/24/18,groceries,8
+3/25/18,groceries,11
+3/29/18,groceries,16.41
+3/30/18,lunch out,10.5
+3/31/18,groceries,26.41
+4/2/18,groceries,17.75
+4/6/18,groceries,3.5
+4/6/18,snack out,4.24
+4/7/18,groceries,22.27
+4/10/18,lunch out,14.14
+4/11/18,lunch out,7
+4/11/18,lunch out,13
+4/12/18,lunch out,12
+4/13/18,lunch out,13.04
+4/17/18,breakfast out,4.34
+4/17/18,groceries,37.37
+4/19/18,lunch out,11.97
+4/19/18,snack out,5.43
+4/20/18,snack out,6
+4/22/18,groceries,24.43
+4/25/18,breakfast out,5.02
+4/25/18,groceries,22.94
+4/29/18,groceries,35.09
+5/5/18,groceries,28.65
+5/7/18,groceries,15.28
+5/7/18,lunch out,12.51
+5/8/18,lunch out,6.52
+5/9/18,groceries,22.48
+5/10/18,lunch out,11.42
+5/10/18,snack out,4.34
+5/11/18,snack out,4.34
+5/12/18,groceries,21.45
+5/12/18,groceries,3.49
+5/12/18,lunch out,15.23
+5/13/18,groceries,9.63
+5/13/18,groceries,25.85
+5/17/18,lunch out,7.61
+5/18/18,lunch out,11.97
+5/18/18,snack out,6.5
+5/22/18,lunch out,10.87
+5/22/18,snack out,4.34
+5/23/18,groceries,34.87
+5/23/18,lunch out,14.15
+5/24/18,snack out,4.34
+5/25/18,lunch out,8.91
+5/25/18,snack out,4.34
+5/27/18,groceries,15
+5/28/18,groceries,9.23
+5/28/18,groceries,70.73
+5/29/18,snack out,4.34
+5/30/18,lunch out,4.34
+5/30/18,snack out,6
+5/31/18,coffee,4.9
+6/1/18,lunch out,13.05
+6/2/18,dinner out,28.5
+6/4/18,groceries,1.28
+6/5/18,groceries,40
+6/5/18,lunch out,30
+6/5/18,snack out,1.98
+6/9/18,snack out,3.79
+6/10/18,groceries,22.35
+6/11/18,groceries,12
+6/12/18,dinner out,25
+6/12/18,groceries,26
+6/13/18,groceries,36.03
+6/14/18,lunch out,20
+6/15/18,groceries,29.58
+6/20/18,groceries,87.85
+6/20/18,groceries,40
+6/26/18,groceries,136.1
+6/28/18,groceries,70.73
+7/2/18,groceries,4.57
+7/3/18,snack out,1
+7/4/18,groceries,14.83
+7/4/18,groceries,12.5
+7/4/18,groceries,14.95
+7/5/18,snack out,21.77
+7/6/18,groceries,12.08
+7/6/18,groceries,12.92
+7/7/18,groceries,21.94
+7/8/18,groceries,0.96
+7/8/18,lunch out,22.42
+7/9/18,groceries,38.14
+7/11/18,snack out,4.34
+7/12/18,groceries,50.48
+7/21/18,snack out,2.77
+7/22/18,groceries,26.34
+7/24/18,groceries,8.74
+7/25/18,groceries,30.13
+7/26/18,dinner out,65
+7/29/18,breakfast out,15.05
+7/30/18,lunch out,27.68
+7/30/18,snack out,6
+8/1/18,coffee,4.5
+8/1/18,groceries,127.92
+8/3/18,snack out,8.06
+8/3/18,snack out,4
+8/4/18,breakfast out,12.76
+8/4/18,snack out,2.2
+8/9/18,groceries,33.17
+8/13/18,groceries,25.48
+8/15/18,dinner out,8.98
+8/16/18,dinner out,22.27
+8/16/18,groceries,33.09
+8/16/18,lunch out,19.47
+8/16/18,snack out,5.43
+8/19/18,breakfast out,22.34
+8/20/18,groceries,9.84
+8/20/18,groceries,9.84
+8/20/18,groceries,13
+8/20/18,lunch out,37.37
+8/23/18,snack out,3.45
+8/24/18,breakfast out,42.42
+8/24/18,lunch out,9.14
+8/25/18,groceries,28.41
+8/25/18,groceries,2.5
+8/26/18,groceries,21.53
+8/29/18,groceries,7
+8/30/18,groceries,22.07
+8/31/18,groceries,8.97
+9/3/18,groceries,11.15
+9/5/18,groceries,44.35
+9/11/18,groceries,7.99
+9/11/18,lunch out,28
+9/13/18,groceries,19.2
+9/13/18,groceries,6.08
+9/16/18,groceries,6.69
+9/17/18,groceries,14.07
+9/18/18,coffee,15.03
+9/19/18,groceries,4
+9/20/18,groceries,13.32
+9/22/18,groceries,37.54
+9/23/18,groceries,34.98
+9/26/18,groceries,21.66
+9/26/18,groceries,15.99
+10/1/18,dinner out,20
+10/1/18,groceries,17.94
+10/3/18,dinner out,6.85
+10/3/18,groceries,19.8
+10/4/18,groceries,15.59
+10/5/18,groceries,15.95
+10/6/18,groceries,42.28
+10/15/18,groceries,8.11
+10/16/18,groceries,24.14
+10/17/18,groceries,32.12
+10/19/18,groceries,7.82
+10/19/18,lunch out,6.51
+10/20/18,groceries,32.35
+10/24/18,groceries,17.05
+10/24/18,snack out,15.51
+10/26/18,snack out,10.79
+10/29/18,groceries,60.65
+10/29/18,groceries,22.74
+11/1/18,groceries,12.25
+11/2/18,groceries,43.71
+11/5/18,groceries,15.73
+11/7/18,groceries,20
+11/10/18,dinner out,59.45
+11/13/18,dinner out,15.51
+11/14/18,groceries,7.99
+11/15/18,lunch out,11
+11/20/18,groceries,27.61
+11/21/18,groceries,38.42
+11/24/18,groceries,14.98
+11/27/18,groceries,3.34
+11/28/18,groceries,14.04
+11/28/18,groceries,15.59
+12/4/18,groceries,17.93
+12/7/18,groceries,44
+12/8/18,dinner out,13.01
+12/8/18,groceries,8
+12/8/18,groceries,6.99
+12/9/18,groceries,17.21
+12/11/18,groceries,9.87
+12/13/18,lunch out,11.41
+12/14/18,groceries,19.67
+12/17/18,dinner out,14.07
+12/18/18,groceries,10.86
+12/19/18,dinner out,17.31
+12/23/18,dinner out,20
+12/24/18,groceries,10.77
+12/26/18,dinner out,40
+12/27/18,lunch out,15
+12/28/18,snack out,5
+12/29/18,dinner out,9.13

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import data from './data/data-old.csv';
+// import data from './data/data-old.csv';
 
 
 

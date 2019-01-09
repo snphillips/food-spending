@@ -169,6 +169,22 @@ export default class App extends Component {
       .tickSize(-innerWidth, 0, 0)
       .tickFormat(''))
 
+    // ==================================
+    // Lables
+    // ==================================
+      svg.append('text')
+         .attr('x', -(innerHeight / 2) )
+         .attr('y', 12 )
+         .attr('transform', 'rotate(-90)')
+         .attr('text-anchor', 'middle')
+         .text('US dollars adjust for inflation')
+
+      svg.append('text')
+         .attr('x', innerWidth / 2)
+         .attr('y', height - 5)
+         .attr('text-anchor', 'middle')
+         .text('month')
+
 
 
 

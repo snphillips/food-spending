@@ -1,0 +1,19 @@
+
+
+DATA
+- csv to json
+- collapse date to monthly
+
+
+
+
+BUIDLING
+- add more horizontal lines (ticks)
+- month names on an angle
+
+
+
+
+
+STYLING
+- style those lines to be lighter
