@@ -32,14 +32,8 @@ export default class App extends Component {
    componentDidMount(){
     this.getData()
     this.drawChart()
-    this.parseDate()
    }
 
-  // Parse the date
-  // TODO: get this to work
-   parseDate() {
-    d3.timeParse("%m-%d-%Y")
-   }
 
 
 
@@ -56,10 +50,12 @@ export default class App extends Component {
           this.valueStringToNumber()
           this.addFoodTypeKeyValue()
           this.adjustDateValue()
+          // this.addAllFoodKey()
+          this.dailyToMonlyData()
 
 
 
-          console.log("this.state.data:", this.state.data)
+          // console.log("this.state.data:", this.state.data)
           this.drawChart()
       }).catch(function(error){
       // handle error
@@ -77,14 +73,11 @@ export default class App extends Component {
     }
 
     // ==================================
-    // Turn date from days into month-year
+    // Change date from month/day/year to month/year
     // ==================================
     adjustDateValue() {
       this.state.data.forEach( (entry) => {
-        // entry.date = entry.date.replace( /,.*\//, '' );
         entry.date = moment(entry.date).format("MMM YY");
-
-    //     return entry
       })
     }
 
@@ -116,57 +109,94 @@ export default class App extends Component {
      }
 
   // ==================================
+   // Add key:value that contains total weight all refuse
+   // (add trash + recycling + compost for a grand total)
+   // ==================================
+   // addAllFoodKey() {
+   //  const newData =
+
+   //  _lodash.map(this.state.data, (entry) => {
+   //    let newKey = Object.assign({}, entry);
+   //    // newKey.allFood = (entry.groceries + entry.dinner + entry.lunch + entry.breakfast + entry.snack + entry.coffee)
+   //    newKey.allFood = ''
+   //    return newKey;
+   //  })
+   //  this.setState({data: newData})
+   // }
+
+  // ==================================
   // The source data is daily, but we're
   // only interested in monthly totals. So, the
   // data needs to be collapsed.
   // ==================================
-  // dailyToMonlyData() {
-  //   // 1) let's find all the unique months (so we can later add their monthly totals)
-  //   let allMonths = _lodash.uniqBy(this.state.data, (item)=>{
-  //     return item.date
-  //   })
-
-  //   // 2) map over the allMonths to return some information we'll need, and
-  //   // the sum of all spending categories per month
-  //    allMonths = _lodash.map(allMonths, (item)=>{
-  //     return item.boroughDistrict
-  //   })
-
-  //   const newData = _lodash.map(allMonths, (boroughDistrict)=>{
-
-  //       const allMonths = _lodash.filter(this.state.data, (item)=>{
-  //         return item.boroughDistrict === boroughDistrict
-  //       })
-
-  //       const borough = _lodash.filter(this.state.data, (item)=>{
-  //         return item.borough === borough
-  //       })
-
-  //       const cd_name = _lodash.filter(this.state.data, (item)=>{
-  //         return item.cd_name === cd_name
-  //       })
-
-  //       const refusetonscollected = _lodash.sumBy(allMonths, (item)=>{
-  //         return item.refusetonscollected
-  //       })
-
-  //       const papertonscollected = _lodash.sumBy(allMonths, (item)=>{
-  //         return item.papertonscollected
-  //       })
+     dailyToMonlyData() {
+      // 1) Get all the unique dates
+      // This returns the first unique entry, by date
+       let uniqueDates = _lodash.uniqBy(this.state.data, (entry) => {
+         return entry.date
+       })
+       console.log("uniqueDates",uniqueDates)
 
 
-  //     return {
-  //       // date: date,
-  //       borough: allMonths[0].borough,
-  //       cd_name: allMonths[0].cd_name,
-  //       _2010_population: allMonths[0]._2010_population,
-  //       refusetonscollected: refusetonscollected,
-  //       papertonscollected: papertonscollected,
-  //       }
-  //   })
-  //   // console.log("data after collapsing 12 months:", newData)
-  //   this.setState({data: newData})
-  // }
+      // 2) Make an array of those unique dates
+       uniqueDates = _lodash.map(uniqueDates, (entry) => {
+        return entry.date
+       })
+       console.log("uniqueDates array", uniqueDates)
+
+
+      // 3) map over uniqueDates array....
+      const newData = _lodash.map(uniqueDates, (date) => {
+
+          let uniqueDates = _lodash.filter(this.state.data, (entry) => {
+            return entry.date === date
+          })
+
+          let groceries = _lodash.sumBy(uniqueDates, (entry) => {
+            return entry.groceries
+          })
+
+          let dinner = _lodash.sumBy(uniqueDates, (entry) => {
+            return entry.dinner
+          })
+
+          let lunch = _lodash.sumBy(uniqueDates, (entry) => {
+            return entry.lunch
+          })
+
+          let breakfast = _lodash.sumBy(uniqueDates, (entry) => {
+            return entry.breakfast
+          })
+
+          let snack = _lodash.sumBy(uniqueDates, (entry) => {
+            return entry.snack
+          })
+
+          let coffee = _lodash.sumBy(uniqueDates, (entry) => {
+            return entry.coffee
+          })
+
+          // let allFood = _lodash.sumBy(uniqueDates, (entry) => {
+          //   return (entry.groceries + entry.dinner + entry.lunch)
+          // })
+
+       return {
+         date: date,
+         groceries: groceries,
+         dinner: dinner,
+         lunch: lunch,
+         breakfast: breakfast,
+         snack: snack,
+         coffee: coffee,
+         // allFood: allFood,
+
+       }
+
+      })
+
+      console.log("newData:", newData)
+     }
+
 
 
 
@@ -210,6 +240,19 @@ export default class App extends Component {
                     .attr("class", "tool-tip");
 
     // ==================================
+    // Layers
+    // ==================================
+
+
+    // ==================================
+    // Colors!
+    // ==================================
+    let colorBars = d3.scaleOrdinal()
+                      .domain(["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"])
+                      // .range(["#21E0D6", "#EF767A", "#820933", "#6457A6", "#2C579E", "#98abc5"]);
+                      .range(["#820933", "#18020C", "#634B66", "#9590A8", "#BBCBCB", "#E5FFDE"]);
+
+    // ==================================
     // Drawing the Scales & Axes
     // ==================================
       let yScale = d3.scaleLinear()
@@ -235,13 +278,13 @@ export default class App extends Component {
       .attr(`transform`, `translate(0, ${innerHeight})`)
       .call(d3.axisBottom(xScale))
       // angling the labels 45 degrees
-      .selectAll("text")
-      .attr("y", 0)
-      .attr("x", 9)
-      // .attr("dy", ".35em")
-      .attr("dy", ".95em")
-      .attr("transform", "rotate(45)")
-      .style("text-anchor", "start");
+        .selectAll("text")
+        .attr("y", 0)
+        .attr("x", 9)
+        .attr("dy", ".95em")
+        .attr("transform", "rotate(45)")
+        .style("text-anchor", "start");
+
 
 
     // ==================================
@@ -251,6 +294,8 @@ export default class App extends Component {
       .data(this.state.data)
       .enter()
       .append('rect')
+      .style("fill", (d) => {return colorBars(d.type)})
+      .style("opacity", .7)
       .attr('x', (d) => xScale(d.date))
       .attr('y', (d) => yScale(d.value))
       // .transition() // a slight delay, see duration()
