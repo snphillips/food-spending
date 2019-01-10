@@ -13,6 +13,7 @@ body {
   padding: 2rem;
   font-family: sans-serif;
   font-size: 100%;
+  /*background-color: ;*/
 }
 
 a {
@@ -43,13 +44,6 @@ Chart
   /*border: 3px solid pink;*/
 }
 
-.tooltip {
-  position: absolute;
-  width: 200px;
-  height: 28px;
-  pointer-events: none;
-}
-
 .bar {
   fill: steelblue;
 }
@@ -60,8 +54,8 @@ Chart
 
 line#indicator-line {
   stroke: red;
-  stroke-width: 2;
-  stroke-dasharray: 3 6;
+  stroke-width: 1;
+  stroke-dasharray: 6 6;
 }
 
 .axis--x path {
@@ -74,6 +68,35 @@ line#indicator-line {
 }
 .grid path {
       /*stroke-width: 0;*/
+}
+
+/* ===================================
+Chart Tooltip
+====================================== */
+.tool-tip {
+  font-size: 80%;
+  position: absolute;
+  background-color: rgba(242, 242, 242, .95);
+  border-radius: 5px;
+  border: 3px solid red;
+  padding: 14px;
+  text-align: left;
+  display: none; /* Keep. This hides the tooltip at initial load */
+}
+
+h4 {
+  font-size: 120%;
+}
+
+ul {
+  list-style-position: inside;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+li {
+  line-height: 1px;
+  padding-left: 0;
 }
 
 /* ===================================

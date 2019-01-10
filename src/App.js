@@ -118,6 +118,13 @@ export default class App extends Component {
                    .attr('transform', `translate(${margin.top}, ${margin.left})`);
 
     // ==================================
+    // ToolTip
+    // ==================================
+    let tooltip = d3.select("body")
+                    .append("div")
+                    .attr("class", "tool-tip");
+
+    // ==================================
     // Drawing the Scales & Axes
     // ==================================
       let yScale = d3.scaleLinear()
@@ -194,6 +201,25 @@ export default class App extends Component {
       })
 
     // ==================================
+    // Tool Tip - on
+    // ==================================
+      .on("mousemove", (d) => {
+        tooltip.style("left", d3.event.pageX + 15 + "px")
+               .style("top", d3.event.pageY - 60 + "px")
+               .style("display", "inline-block")
+               .html(`${d.date}</br>
+                 ${d.valueInflation}</br>
+                 <p>(comment/memory about food this month)</p>`)
+
+      })
+
+
+    // ==================================
+    // Tool Tip - off
+    // ==================================
+      chart.on("mouseout", (d) => { tooltip.style("display", "none");})
+
+    // ==================================
     // Drawing the Gridlines
     // ==================================
     chart.append('g')
@@ -203,6 +229,8 @@ export default class App extends Component {
                          .tickFormat('')
                          .ticks(40)
       )
+
+
 
 
 
