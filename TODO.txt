@@ -1,0 +1,19 @@
+
+
+
+
+General
+- labels slanted
+- most to least button
+- chronological button
+
+
+
+Data
+- csv to json
+- calculate average
+- collapse months into years
+
+
+
+Styling

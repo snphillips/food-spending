@@ -6,7 +6,8 @@ export default class Chart extends Component {
   render() {
     return (
 
-      <svg width="1100"
+      <svg viewBox=" 0 0 1100 500"
+           width="1100"
            height="500">
       </svg>
 
@@ -14,7 +15,6 @@ export default class Chart extends Component {
   }
 }
 
-      // <svg viewBox=" 0 0 800 500"
-           // width="800"
+      // <svg width="1100"
            // height="500">
       // </svg>

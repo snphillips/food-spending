@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import data from './data/data.csv';
-import sample from './data/Sample.js';
+import _lodash from 'lodash';
+// import data from './data/data.csv';
+import dataAll from './data/dataAll.csv';
+// import sample from './data/Sample.js';
 import Chart from './Chart';
 // import RechartsChart from './RechartsChart'
 import ChartHeader from './ChartHeader';
@@ -40,52 +42,136 @@ export default class App extends Component {
 
 
 
+
     //  ==================================
     //  Get the data
     //  ==================================
     getData() {
-      d3.csv(data)
+      d3.csv(dataAll)
         .then((data) => {
-        data.forEach( (d) => {
-          // TODO: parse date properly
-          // d.date = this.parseDate(d.date);
-          d.value = +d.value;
-          d.valueInflation = +d.valueInflation
+          // 1) set state with data
+          this.setState({data: data})
+          // 2) data needs major work
+          this.valueStringToNumber()
+          // this.addGroceryKeyValue()
+          // this.addDinnerKeyValue()
+          // this.addLunchKeyValue()
+          // this.addBreakfastKeyValue()
+          // this.addCoffeeKeyValue()
+          this.addFoodTypeKeyValue()
 
-          d.groceries = +d.groceries;
-          d.groceriesInflation = +d.groceriesInflation;
-          d.dinner = +d.dinner;
-          d.dinnerInflation = +d.dinnerInflation;
-          d.lunch = +d.lunch;
-          d.lunchInflation = +d.lunchInflation;
-          d.breakfast = +d.breakfast;
-          d.breakfastInflation = +d.breakfastInflation;
-          d.snack = +d.snack;
-          d.snackInflation = +d.snackInflation;
-          d.coffee = +d.coffee;
-          d.coffeeInflation = +d.coffeeInflation;
-        })
-        console.log(`data:`, data)
-        this.setState({data: data})
-        console.log("this.state.data:", this.state.data)
-        console.log("hihi", this.state.data[0].valueInflation)
-        this.drawChart()
+
+
+
+          console.log("this.state.data:", this.state.data)
+          this.drawChart()
       }).catch(function(error){
       // handle error
       })
     }
 
 
+    // ==================================
+    // Turn value into useable number
+    // ==================================
+    valueStringToNumber() {
+      this.state.data.forEach( (d) => {
+        d.value = +d.value;
+      })
+    }
 
 
     // ==================================
-    // ToolTip!
+    // Adding key:value for different types of food spending
+    // groceries, dinner out, lunch out, snack out, coffee out
     // ==================================
+     addGroceryKeyValue() {
+       const newData =
+      _lodash.map(this.state.data, (entry) => {
+        let newKey = Object.assign({}, entry);
+        if (entry.type === 'groceries') {
+          newKey.groceries = entry.value
+        } else newKey.groceries = ''
+        return newKey;
+      })
+      this.setState({data: newData})
+     }
+
+     addDinnerKeyValue() {
+       const newData =
+      _lodash.map(this.state.data, (entry) => {
+        let newKey = Object.assign({}, entry);
+        if (entry.type === 'dinner out') {
+          newKey.dinner = entry.value
+        } else newKey.dinner = ''
+        return newKey;
+      })
+      this.setState({data: newData})
+     }
+
+    addLunchKeyValue() {
+       const newData =
+      _lodash.map(this.state.data, (entry) => {
+        let newKey = Object.assign({}, entry);
+        if (entry.type === 'lunch out') {
+          newKey.lunch = entry.value
+        } else newKey.lunch = ''
+        return newKey;
+      })
+      this.setState({data: newData})
+     }
+
+    addBreakfastKeyValue() {
+       const newData =
+      _lodash.map(this.state.data, (entry) => {
+        let newKey = Object.assign({}, entry);
+        if (entry.type === 'breakfast out') {
+          newKey.breakfast = entry.value
+        } else newKey.breakfast = ''
+        return newKey;
+      })
+      this.setState({data: newData})
+     }
+
+    addCoffeeKeyValue() {
+       const newData =
+      _lodash.map(this.state.data, (entry) => {
+        let newKey = Object.assign({}, entry);
+        if (entry.type === 'coffee') {
+          newKey.coffee = entry.value
+        } else newKey.coffee = ''
+        return newKey;
+      })
+      this.setState({data: newData})
+     }
 
 
-    // ==================================
-    //
-    // ==================================
+    addFoodTypeKeyValue() {
+       const newData =
+      _lodash.map(this.state.data, (entry) => {
+        let newKey = Object.assign({}, entry);
+
+        if (entry.type === 'groceries') {
+          newKey.groceries = entry.value
+        } else if (entry.type === 'dinner out') {
+          newKey.dinner = entry.value
+        } else if (entry.type === 'lunch out') {
+          newKey.lunch = entry.value
+        } else if (entry.type === 'breakfast out') {
+          newKey.breakfast = entry.value
+        } else if (entry.type === 'coffee') {
+          newKey.coffee = entry.value
+        } else if (entry.type === 'snack out') {
+          newKey.snack = entry.value
+        }
+        return newKey;
+      })
+      this.setState({data: newData})
+     }
+
+
+
+
 
 
 
@@ -131,7 +217,7 @@ export default class App extends Component {
         // 1) Domain. the min and max value of domain(data)
         // 2) Range. the min and max value of range(the visualization)
         .range([innerHeight, 0])
-        .domain([0, d3.max(this.state.data, d => d.valueInflation)])
+        .domain([0, d3.max(this.state.data, d => d.value)])
 
       chart.append('g')
         .call(d3.axisLeft(yScale))
@@ -143,12 +229,21 @@ export default class App extends Component {
         // map over the data, and display whatever is the date value
         // your version
         .domain(this.state.data.map (d => d.date))
-        // .domain(sample.map (s => s.language))
         .padding(0.2)
+
 
      chart.append('g')
       .attr(`transform`, `translate(0, ${innerHeight})`)
       .call(d3.axisBottom(xScale))
+      // angling the labels 45 degrees
+      .selectAll("text")
+      .attr("y", 0)
+      .attr("x", 9)
+      // .attr("dy", ".35em")
+      .attr("dy", ".95em")
+      .attr("transform", "rotate(45)")
+      .style("text-anchor", "start");
+
 
     // ==================================
     // Drawing the Bars
@@ -158,9 +253,9 @@ export default class App extends Component {
       .enter()
       .append('rect')
       .attr('x', (d) => xScale(d.date))
-      .attr('y', (d) => yScale(d.valueInflation))
+      .attr('y', (d) => yScale(d.value))
       // .transition() // a slight delay, see duration()
-      .attr('height', (d) => innerHeight - yScale(d.valueInflation))
+      .attr('height', (d) => innerHeight - yScale(d.value))
       // .duration(600)
       .attr('width', (d) => xScale.bandwidth())
 
@@ -208,7 +303,7 @@ export default class App extends Component {
                .style("top", d3.event.pageY - 60 + "px")
                .style("display", "inline-block")
                .html(`${d.date}</br>
-                 ${d.valueInflation}</br>
+                 ${d.value}</br>
                  <p>(comment/memory about food this month)</p>`)
 
       })
@@ -248,11 +343,11 @@ export default class App extends Component {
          .text('US dollars adjusted for inflation')
 
     // bottom label
-      svg.append('text')
-         .attr('x', innerWidth / 2)
-         .attr('y', height - 5)
-         .attr('text-anchor', 'middle')
-         .text('month')
+      // svg.append('text')
+      //    .attr('x', innerWidth / 2)
+      //    .attr('y', height - 5)
+      //    .attr('text-anchor', 'middle')
+      //    .text('month')
 
 
 
