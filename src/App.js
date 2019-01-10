@@ -50,7 +50,6 @@ export default class App extends Component {
           this.valueStringToNumber()
           this.addFoodTypeKeyValue()
           this.adjustDateValue()
-          // this.addAllFoodKey()
           this.dailyToMonlyData()
 
 
@@ -64,7 +63,7 @@ export default class App extends Component {
 
 
     // ==================================
-    // Turn value into useable number
+    // Turn value from string to number
     // ==================================
     valueStringToNumber() {
       this.state.data.forEach( (entry) => {
@@ -74,6 +73,7 @@ export default class App extends Component {
 
     // ==================================
     // Change date from month/day/year to month/year
+    // TODO: look into moment.js warning
     // ==================================
     adjustDateValue() {
       this.state.data.forEach( (entry) => {
@@ -108,26 +108,11 @@ export default class App extends Component {
       this.setState({data: newData})
      }
 
-  // ==================================
-   // Add key:value that contains total weight all refuse
-   // (add trash + recycling + compost for a grand total)
-   // ==================================
-   // addAllFoodKey() {
-   //  const newData =
-
-   //  _lodash.map(this.state.data, (entry) => {
-   //    let newKey = Object.assign({}, entry);
-   //    // newKey.allFood = (entry.groceries + entry.dinner + entry.lunch + entry.breakfast + entry.snack + entry.coffee)
-   //    newKey.allFood = ''
-   //    return newKey;
-   //  })
-   //  this.setState({data: newData})
-   // }
 
   // ==================================
-  // The source data is daily, but we're
-  // only interested in monthly totals. So, the
-  // data needs to be collapsed.
+  // The source data is daily, but we
+  // want monthly totals.
+  // Therefore, data needs to be collapsed.
   // ==================================
      dailyToMonlyData() {
       // 1) Get all the unique dates
@@ -135,27 +120,23 @@ export default class App extends Component {
        let uniqueDates = _lodash.uniqBy(this.state.data, (entry) => {
          return entry.date
        })
-       console.log("uniqueDates",uniqueDates)
-
 
       // 2) Make an array of those unique dates
        uniqueDates = _lodash.map(uniqueDates, (entry) => {
         return entry.date
        })
-       console.log("uniqueDates array", uniqueDates)
 
-
-      // 3) map over uniqueDates array....
+      // 3) map over uniqueDates array to return the data we want
       const newData = _lodash.map(uniqueDates, (date) => {
 
           let uniqueDates = _lodash.filter(this.state.data, (entry) => {
             return entry.date === date
           })
-
+          // sum the groceries according to every unique date
           let groceries = _lodash.sumBy(uniqueDates, (entry) => {
             return entry.groceries
           })
-
+          // sum the dinner spending according to every unique date
           let dinner = _lodash.sumBy(uniqueDates, (entry) => {
             return entry.dinner
           })
@@ -176,10 +157,6 @@ export default class App extends Component {
             return entry.coffee
           })
 
-          // let allFood = _lodash.sumBy(uniqueDates, (entry) => {
-          //   return (entry.groceries + entry.dinner + entry.lunch)
-          // })
-
        return {
          date: date,
          groceries: groceries,
@@ -188,20 +165,11 @@ export default class App extends Component {
          breakfast: breakfast,
          snack: snack,
          coffee: coffee,
-         // allFood: allFood,
-
        }
-
       })
-
-      console.log("newData:", newData)
+       this.setState({data: newData})
+       console.log("newData:", newData)
      }
-
-
-
-
-
-
 
 
 
@@ -219,18 +187,31 @@ export default class App extends Component {
 
       // define margins for some nice padding on the chart
       const margin = {top: 60, right: 60, bottom: 60, left: 60};
-      // const width = 800;
-      // const height = 500;
-      // put back at end when you want to go responsive
       const width = svg.attr('width');
       const height = svg.attr('height');
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
       const chart = svg.append("g")
-                   // .attr('transform', `translate(${innerWidth}, ${innerHeight})`);
-                   // .attr('transform', `translate(${innerHeight}, ${innerWidth})`);
                    .attr('transform', `translate(${margin.top}, ${margin.left})`);
+
+    // ==================================
+    // Layers for stacking
+    // ==================================
+     let keys = (["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"])
+     // not too sure what's going on here. I think it's saying, use all keys
+     // except date.
+     // let keys = Object.keys(this.state.data[0]).filter(k=>k!=="date");
+
+     let stack = d3.stack()
+                   .keys(keys)
+                   .order(d3.stackOrderNone)
+                   .offset(d3.stackOffsetNone);
+
+    let layers = stack(this.state.data);
+    console.log("layers", layers);
+
+
 
     // ==================================
     // ToolTip
@@ -239,17 +220,12 @@ export default class App extends Component {
                     .append("div")
                     .attr("class", "tool-tip");
 
-    // ==================================
-    // Layers
-    // ==================================
-
 
     // ==================================
     // Colors!
     // ==================================
     let colorBars = d3.scaleOrdinal()
                       .domain(["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"])
-                      // .range(["#21E0D6", "#EF767A", "#820933", "#6457A6", "#2C579E", "#98abc5"]);
                       .range(["#820933", "#18020C", "#634B66", "#9590A8", "#BBCBCB", "#E5FFDE"]);
 
     // ==================================
@@ -259,11 +235,13 @@ export default class App extends Component {
         // 1) Domain. the min and max value of domain(data)
         // 2) Range. the min and max value of range(the visualization)
         .range([innerHeight, 0])
-        .domain([0, d3.max(this.state.data, d => d.value)])
+        .domain([0, d3.max(this.state.data, d => d.groceries + d.dinner + d.lunch + d.breakfast + d.snack + d.coffee)])
+        // TODO: hard-coded for now, but eventually, put in the max value of
+        // food groups added up
+        // .domain([0, 800])
 
-      chart.append('g')
-        .call(d3.axisLeft(yScale))
-
+        // Special layered bar chart stuff
+        yScale.domain([0, 1.15 * d3.max(layers[layers.length - 1], d => d[1])]);
 
       let xScale = d3.scaleBand()
         .range([0, innerWidth])
@@ -273,6 +251,8 @@ export default class App extends Component {
         .domain(this.state.data.map (d => d.date))
         .padding(0.2)
 
+      chart.append('g')
+        .call(d3.axisLeft(yScale))
 
      chart.append('g')
       .attr(`transform`, `translate(0, ${innerHeight})`)
@@ -287,6 +267,7 @@ export default class App extends Component {
 
 
 
+
     // ==================================
     // Drawing the Bars
     // ==================================
@@ -297,9 +278,11 @@ export default class App extends Component {
       .style("fill", (d) => {return colorBars(d.type)})
       .style("opacity", .7)
       .attr('x', (d) => xScale(d.date))
-      .attr('y', (d) => yScale(d.value))
+      .attr('y', (d) => yScale(d.groceries))
+      // .attr("y", (d) => { return yScale(d[1]); })
       // .transition() // a slight delay, see duration()
-      .attr('height', (d) => innerHeight - yScale(d.value))
+      .attr('height', (d) => innerHeight - yScale(d.groceries))
+      // .attr("height", (d) => { return yScale(d[0]) - yScale(d[1]); })
       // .duration(600)
       .attr('width', (d) => xScale.bandwidth())
 
@@ -340,14 +323,15 @@ export default class App extends Component {
       })
 
     // ==================================
-    // Tool Tip - on
+    // Tool Tip
     // ==================================
       .on("mousemove", (d) => {
         tooltip.style("left", d3.event.pageX + 15 + "px")
                .style("top", d3.event.pageY - 60 + "px")
                .style("display", "inline-block")
-               .html(`${d.date}</br>
-                 ${d.value}</br>
+               .html(`
+                 ${d.date}</br>
+                 ${d.groceries}</br>
                  <p>(comment/memory about food this month)</p>`)
 
       })

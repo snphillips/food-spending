@@ -1,0 +1,45 @@
+
+
+
+
+
+
+
+
+
+
+
+    //  ==================================
+    //  Get the data
+    //  ==================================
+    getData() {
+      d3.csv(data)
+        .then((data) => {
+        data.forEach( (d) => {
+          // TODO: parse date properly
+          // d.date = this.parseDate(d.date);
+          d.value = +d.value;
+          d.valueInflation = +d.valueInflation
+
+          d.groceries = +d.groceries;
+          d.groceriesInflation = +d.groceriesInflation;
+          d.dinner = +d.dinner;
+          d.dinnerInflation = +d.dinnerInflation;
+          d.lunch = +d.lunch;
+          d.lunchInflation = +d.lunchInflation;
+          d.breakfast = +d.breakfast;
+          d.breakfastInflation = +d.breakfastInflation;
+          d.snack = +d.snack;
+          d.snackInflation = +d.snackInflation;
+          d.coffee = +d.coffee;
+          d.coffeeInflation = +d.coffeeInflation;
+        })
+        console.log(`data:`, data)
+        this.setState({data: data})
+        console.log("this.state.data:", this.state.data)
+        console.log("hihi", this.state.data[0].valueInflation)
+        this.drawChart()
+      }).catch(function(error){
+      // handle error
+      })
+    }

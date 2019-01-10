@@ -1,19 +1,26 @@
 
+http://www.adeveloperdiary.com/d3-js/create-stacked-bar-chart-using-d3-js/
 
 
-
-General
-- labels slanted
+GENERAL
+- how to do stacked bar chart?
 - most to least button
 - chronological button
 
+-there's no longer a value key. It's now the name of all the food types
 
 
-Data
-- csv to json
-- calculate average
+
+DATA
 - collapse months into years
+- adjust for inflation
+  2014: 6.5%   1.065
+  2015: 6.3%   1.063
+  2016: 5%     1.05
+  2017: 2.8%   1.028
+
+- calculate average
 
 
 
-Styling
+STYLING
