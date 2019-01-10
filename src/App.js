@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import _lodash from 'lodash';
+import moment from 'moment';
 // import data from './data/data.csv';
 import dataAll from './data/dataAll.csv';
 // import sample from './data/Sample.js';
@@ -53,13 +54,8 @@ export default class App extends Component {
           this.setState({data: data})
           // 2) data needs major work
           this.valueStringToNumber()
-          // this.addGroceryKeyValue()
-          // this.addDinnerKeyValue()
-          // this.addLunchKeyValue()
-          // this.addBreakfastKeyValue()
-          // this.addCoffeeKeyValue()
           this.addFoodTypeKeyValue()
-
+          this.adjustDateValue()
 
 
 
@@ -75,77 +71,27 @@ export default class App extends Component {
     // Turn value into useable number
     // ==================================
     valueStringToNumber() {
-      this.state.data.forEach( (d) => {
-        d.value = +d.value;
+      this.state.data.forEach( (entry) => {
+        entry.value = +entry.value;
       })
     }
 
+    // ==================================
+    // Turn date from days into month-year
+    // ==================================
+    adjustDateValue() {
+      this.state.data.forEach( (entry) => {
+        // entry.date = entry.date.replace( /,.*\//, '' );
+        entry.date = moment(entry.date).format("MMM YY");
+
+    //     return entry
+      })
+    }
 
     // ==================================
     // Adding key:value for different types of food spending
     // groceries, dinner out, lunch out, snack out, coffee out
     // ==================================
-     addGroceryKeyValue() {
-       const newData =
-      _lodash.map(this.state.data, (entry) => {
-        let newKey = Object.assign({}, entry);
-        if (entry.type === 'groceries') {
-          newKey.groceries = entry.value
-        } else newKey.groceries = ''
-        return newKey;
-      })
-      this.setState({data: newData})
-     }
-
-     addDinnerKeyValue() {
-       const newData =
-      _lodash.map(this.state.data, (entry) => {
-        let newKey = Object.assign({}, entry);
-        if (entry.type === 'dinner out') {
-          newKey.dinner = entry.value
-        } else newKey.dinner = ''
-        return newKey;
-      })
-      this.setState({data: newData})
-     }
-
-    addLunchKeyValue() {
-       const newData =
-      _lodash.map(this.state.data, (entry) => {
-        let newKey = Object.assign({}, entry);
-        if (entry.type === 'lunch out') {
-          newKey.lunch = entry.value
-        } else newKey.lunch = ''
-        return newKey;
-      })
-      this.setState({data: newData})
-     }
-
-    addBreakfastKeyValue() {
-       const newData =
-      _lodash.map(this.state.data, (entry) => {
-        let newKey = Object.assign({}, entry);
-        if (entry.type === 'breakfast out') {
-          newKey.breakfast = entry.value
-        } else newKey.breakfast = ''
-        return newKey;
-      })
-      this.setState({data: newData})
-     }
-
-    addCoffeeKeyValue() {
-       const newData =
-      _lodash.map(this.state.data, (entry) => {
-        let newKey = Object.assign({}, entry);
-        if (entry.type === 'coffee') {
-          newKey.coffee = entry.value
-        } else newKey.coffee = ''
-        return newKey;
-      })
-      this.setState({data: newData})
-     }
-
-
     addFoodTypeKeyValue() {
        const newData =
       _lodash.map(this.state.data, (entry) => {
@@ -168,6 +114,59 @@ export default class App extends Component {
       })
       this.setState({data: newData})
      }
+
+  // ==================================
+  // The source data is daily, but we're
+  // only interested in monthly totals. So, the
+  // data needs to be collapsed.
+  // ==================================
+  // dailyToMonlyData() {
+  //   // 1) let's find all the unique months (so we can later add their monthly totals)
+  //   let allMonths = _lodash.uniqBy(this.state.data, (item)=>{
+  //     return item.date
+  //   })
+
+  //   // 2) map over the allMonths to return some information we'll need, and
+  //   // the sum of all spending categories per month
+  //    allMonths = _lodash.map(allMonths, (item)=>{
+  //     return item.boroughDistrict
+  //   })
+
+  //   const newData = _lodash.map(allMonths, (boroughDistrict)=>{
+
+  //       const allMonths = _lodash.filter(this.state.data, (item)=>{
+  //         return item.boroughDistrict === boroughDistrict
+  //       })
+
+  //       const borough = _lodash.filter(this.state.data, (item)=>{
+  //         return item.borough === borough
+  //       })
+
+  //       const cd_name = _lodash.filter(this.state.data, (item)=>{
+  //         return item.cd_name === cd_name
+  //       })
+
+  //       const refusetonscollected = _lodash.sumBy(allMonths, (item)=>{
+  //         return item.refusetonscollected
+  //       })
+
+  //       const papertonscollected = _lodash.sumBy(allMonths, (item)=>{
+  //         return item.papertonscollected
+  //       })
+
+
+  //     return {
+  //       // date: date,
+  //       borough: allMonths[0].borough,
+  //       cd_name: allMonths[0].cd_name,
+  //       _2010_population: allMonths[0]._2010_population,
+  //       refusetonscollected: refusetonscollected,
+  //       papertonscollected: papertonscollected,
+  //       }
+  //   })
+  //   // console.log("data after collapsing 12 months:", newData)
+  //   this.setState({data: newData})
+  // }
 
 
 
@@ -341,13 +340,6 @@ export default class App extends Component {
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
          .text('US dollars adjusted for inflation')
-
-    // bottom label
-      // svg.append('text')
-      //    .attr('x', innerWidth / 2)
-      //    .attr('y', height - 5)
-      //    .attr('text-anchor', 'middle')
-      //    .text('month')
 
 
 
