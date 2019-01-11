@@ -4,9 +4,7 @@ import _lodash from 'lodash';
 import moment from 'moment';
 // import data from './data/data.csv';
 import dataAll from './data/dataAll.csv';
-// import sample from './data/Sample.js';
 import Chart from './Chart';
-// import RechartsChart from './RechartsChart'
 import ChartHeader from './ChartHeader';
 import Footer from './Footer';
 
@@ -35,9 +33,6 @@ export default class App extends Component {
    }
 
 
-
-
-
     //  ==================================
     //  Get the data
     //  ==================================
@@ -46,21 +41,17 @@ export default class App extends Component {
         .then((data) => {
           // 1) set state with data
           this.setState({data: data})
-          // 2) data needs major work
+          // 2) raw data needs major manipulation
           this.valueStringToNumber()
           this.addFoodTypeKeyValue()
           this.adjustDateValue()
           this.dailyToMonlyData()
-
-
-
           // console.log("this.state.data:", this.state.data)
           this.drawChart()
       }).catch(function(error){
       // handle error
       })
     }
-
 
     // ==================================
     // Turn value from string to number
@@ -108,7 +99,6 @@ export default class App extends Component {
       this.setState({data: newData})
      }
 
-
   // ==================================
   // The source data is daily, but we
   // want monthly totals.
@@ -116,12 +106,13 @@ export default class App extends Component {
   // ==================================
      dailyToMonlyData() {
       // 1) Get all the unique dates
-      // This returns the first unique entry, by date
+      // This returns the first unique entry, by date. Helpful, but
+      // not what we need.
        let uniqueDates = _lodash.uniqBy(this.state.data, (entry) => {
          return entry.date
        })
 
-      // 2) Make an array of those unique dates
+      // 2) Make an array of those unique dates only
        uniqueDates = _lodash.map(uniqueDates, (entry) => {
         return entry.date
        })
@@ -182,35 +173,35 @@ export default class App extends Component {
     // Setting the Stage
     // ==================================
      drawChart() {
-      // select created <svg> element in the HTML file with d3 select
+      // select the <svg> element in the HTML file with d3 select
       const svg = d3.select("svg")
 
       // define margins for some nice padding on the chart
-      const margin = {top: 60, right: 60, bottom: 60, left: 60};
-      const width = svg.attr('width');
-      const height = svg.attr('height');
+      const margin = {top: 20, right: 60, bottom: 60, left: 60};
+      const width = svg.attr('width')
+      const height = svg.attr('height')
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
-
+      // drawing the chart on the screen
       const chart = svg.append("g")
-                   .attr('transform', `translate(${margin.top}, ${margin.left})`);
+                   .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+      console.log("margin.top", margin.top)
+      console.log("margin.left", margin.left)
 
     // ==================================
     // Layers for stacking
     // ==================================
      let keys = (["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"])
-     // not too sure what's going on here. I think it's saying, use all keys
-     // except date.
-     // let keys = Object.keys(this.state.data[0]).filter(k=>k!=="date");
 
      let stack = d3.stack()
                    .keys(keys)
-                   .order(d3.stackOrderNone)
-                   .offset(d3.stackOffsetNone);
+                   // put the largest series on bottom.
+                   .order(d3.stackOrderDescending)
 
+    // Moving forward, d3 is using layers, as the data
     let layers = stack(this.state.data);
     console.log("layers", layers);
-
 
 
     // ==================================
@@ -226,7 +217,7 @@ export default class App extends Component {
     // ==================================
     let colorBars = d3.scaleOrdinal()
                       .domain(["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"])
-                      .range(["#E5FFDE","#18020C", "#634B66", "#9590A8", "#BBCBCB","#820933"]);
+                      .range(["#bf8b85","#5D5F71", "#634b66", "#9590a8", "#bbcbcb","#820933"]);
 
     // ==================================
     // Drawing the Scales & Axes
@@ -235,28 +226,26 @@ export default class App extends Component {
         // 1) Domain. the min and max value of domain(data)
         // 2) Range. the min and max value of range(the visualization)
         .range([innerHeight, 0])
-        // .domain([0, d3.max(this.state.data, d => d.groceries + d.dinner + d.lunch + d.breakfast + d.snack + d.coffee)])
-        // TODO: hard-coded for now, but eventually, put in the max value of food groups added up
-        // .domain([0, 750])
-
         // Special layered bar chart stuff
-        yScale.domain([0, 1.04 * d3.max(layers[layers.length - 1], d => d[1])]);
+        // a) set lowest point at 0
+        // b) the 1.03 gives us a *tiny* bit pf space on top of the
+        // highest value.
+        .domain([0, 1.03 * d3.max(layers[layers.length - 1], d => d[1])]);
 
       let xScale = d3.scaleBand()
         .range([0, innerWidth])
-        // .range([0, width])
-        // map over the data, and display whatever is the date value
-        // your version
         .domain(this.state.data.map (d => d.date))
-        .padding(0.2)
+        .padding(0.1)
 
+      // drawing the left scale
       chart.append('g')
         .call(d3.axisLeft(yScale))
 
-     chart.append('g')
-      .attr(`transform`, `translate(0, ${innerHeight})`)
-      .call(d3.axisBottom(xScale))
-      // angling the labels 45 degrees
+      // drawing the bottom scale
+      chart.append('g')
+       .attr(`transform`, `translate(0, ${innerHeight})`)
+       .call(d3.axisBottom(xScale))
+       // angling the labels 45 degrees
         .selectAll("text")
         .attr("y", 0)
         .attr("x", 9)
@@ -265,9 +254,8 @@ export default class App extends Component {
         .style("text-anchor", "start");
 
     // ==================================
-    // Drawing the Layers
+    // Drawing the Layers/Bars
     // ==================================
-
       let layer = chart.selectAll(".layer")
         .data(layers)
         .enter()
@@ -277,61 +265,33 @@ export default class App extends Component {
 
 
       layer.selectAll("rect")
-           .data(function(d) {
-             return d;
-            })
-           .enter()
-           .append("rect")
-           .attr("class", "bar")
-           .attr('x', (d) => xScale(d.data.date))
-           .attr("y", function(d) {
-             return yScale(d[1]);
-           })
-           .attr("height", function(d) {
-             return yScale(d[0]) - yScale(d[1]);
-           })
-          .attr('width', (d) => xScale.bandwidth())
+       .data(function(d) {
+         return d;
+        })
+       .enter()
+       .append("rect")
+       .attr("class", "bar")
+       .attr("class", keys)
+       .attr('x', (d) => xScale(d.data.date))
+       .attr("y", (d) => {
+         return yScale(d[1]);
+       })
+       .attr("height", function(d) {
+         return yScale(d[0]) - yScale(d[1]);
+       })
+      .attr('width', (d) => xScale.bandwidth())
 
-
-    // ==================================
-    // Drawing the Bars
-    // ==================================
-     // chart.selectAll('rect')
-     //  .data(this.state.data)
-     //  .enter()
-     //  .append('rect')
-     //  .style("fill", (d) => {return colorBars(d.type)})
-     //  .style("opacity", .7)
-     //  .attr('x', (d) => xScale(d.date))
-     //  .attr('y', (d) => yScale(d.groceries))
-     //  // .attr("y", (d) => { return yScale(d[1]); })
-     //  // .transition() // a slight delay, see duration()
-     //  .attr('height', (d) => innerHeight - yScale(d.groceries))
-     //  // .attr("height", (d) => { return yScale(d[0]) - yScale(d[1]); })
-     //  // .duration(600)
-     //  .attr('width', (d) => xScale.bandwidth())
 
     // ==================================
     // Mouseover: make transluscent
     // note: don't use an arrow function here
     // ==================================
       .on("mouseover", function(d) {
+        console.log("bar hover", this)
         d3.select(this)
           .transition()
           .duration(300)
-          .attr('opacity', .7)
-
-        let line = chart.append('line')
-             .attr('id', 'indicator-line')
-             // the start and end points of width of line
-             .attr('x1', 0)
-             .attr('x2', innerWidth)
-             // the start and end points of height line
-             // this.y.animVal.value is the height of the element in
-             // crazy svg world (rememver, svg's (0,0) is upper left.)
-             .attr('y1', this.y.animVal.value)
-             .attr('y2', this.y.animVal.value)
-             .attr('stroke', 'red')
+          // .attr('opacity', .7)
       })
 
     // ==================================
@@ -342,7 +302,7 @@ export default class App extends Component {
          d3.select(this)
            .transition()
            .duration(300)
-           .attr('opacity', 1)
+           // .attr('opacity', 1)
         // removing the indicator line
          chart.selectAll('#indicator-line').remove()
       })
@@ -356,7 +316,10 @@ export default class App extends Component {
                .style("display", "inline-block")
                .html(`
                  ${d.data.date}</br>
-                 ${d.key}</br>
+                 ${d.data.name}</br>
+                 $${d[1] - d[0]}</br>
+
+
                  <p>(comment/memory about food this month)</p>`)
 
       })
@@ -378,12 +341,9 @@ export default class App extends Component {
                          .ticks(40)
       )
 
-
-
-
-
     // ==================================
-    // Adding the Labels
+    // Adding the left side label
+    // (no label on bottom...too obvious)
     // ==================================
     // left side label
       svg.append('text')
@@ -394,15 +354,6 @@ export default class App extends Component {
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
          .text('US dollars adjusted for inflation')
-
-
-
-
-
-
-
-
-
     }
 
 

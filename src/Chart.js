@@ -6,8 +6,8 @@ export default class Chart extends Component {
   render() {
     return (
 
-      <svg viewBox=" 0 0 1100 500"
-           width="1100"
+      <svg viewBox=" 0 0 1000 500"
+           width="1000"
            height="500">
       </svg>
 
