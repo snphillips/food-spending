@@ -45,11 +45,11 @@ Chart
 }
 
 .bar {
-  fill: steelblue;
+  /*fill: steelblue;*/
 }
 
 .bar:hover {
-  fill: brown;
+  /*fill: brown;*/
 }
 
 line#indicator-line {

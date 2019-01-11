@@ -226,7 +226,7 @@ export default class App extends Component {
     // ==================================
     let colorBars = d3.scaleOrdinal()
                       .domain(["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"])
-                      .range(["#820933", "#18020C", "#634B66", "#9590A8", "#BBCBCB", "#E5FFDE"]);
+                      .range(["#E5FFDE","#18020C", "#634B66", "#9590A8", "#BBCBCB","#820933"]);
 
     // ==================================
     // Drawing the Scales & Axes
@@ -235,13 +235,12 @@ export default class App extends Component {
         // 1) Domain. the min and max value of domain(data)
         // 2) Range. the min and max value of range(the visualization)
         .range([innerHeight, 0])
-        .domain([0, d3.max(this.state.data, d => d.groceries + d.dinner + d.lunch + d.breakfast + d.snack + d.coffee)])
-        // TODO: hard-coded for now, but eventually, put in the max value of
-        // food groups added up
-        // .domain([0, 800])
+        // .domain([0, d3.max(this.state.data, d => d.groceries + d.dinner + d.lunch + d.breakfast + d.snack + d.coffee)])
+        // TODO: hard-coded for now, but eventually, put in the max value of food groups added up
+        // .domain([0, 750])
 
         // Special layered bar chart stuff
-        yScale.domain([0, 1.15 * d3.max(layers[layers.length - 1], d => d[1])]);
+        yScale.domain([0, 1.04 * d3.max(layers[layers.length - 1], d => d[1])]);
 
       let xScale = d3.scaleBand()
         .range([0, innerWidth])
@@ -265,26 +264,52 @@ export default class App extends Component {
         .attr("transform", "rotate(45)")
         .style("text-anchor", "start");
 
+    // ==================================
+    // Drawing the Layers
+    // ==================================
 
+      let layer = chart.selectAll(".layer")
+        .data(layers)
+        .enter()
+        .append("g")
+        .attr("class", "layer")
+        .style("fill", (d) => {return colorBars(d.key)})
+
+
+      layer.selectAll("rect")
+           .data(function(d) {
+             return d;
+            })
+           .enter()
+           .append("rect")
+           .attr("class", "bar")
+           .attr('x', (d) => xScale(d.data.date))
+           .attr("y", function(d) {
+             return yScale(d[1]);
+           })
+           .attr("height", function(d) {
+             return yScale(d[0]) - yScale(d[1]);
+           })
+          .attr('width', (d) => xScale.bandwidth())
 
 
     // ==================================
     // Drawing the Bars
     // ==================================
-     chart.selectAll('rect')
-      .data(this.state.data)
-      .enter()
-      .append('rect')
-      .style("fill", (d) => {return colorBars(d.type)})
-      .style("opacity", .7)
-      .attr('x', (d) => xScale(d.date))
-      .attr('y', (d) => yScale(d.groceries))
-      // .attr("y", (d) => { return yScale(d[1]); })
-      // .transition() // a slight delay, see duration()
-      .attr('height', (d) => innerHeight - yScale(d.groceries))
-      // .attr("height", (d) => { return yScale(d[0]) - yScale(d[1]); })
-      // .duration(600)
-      .attr('width', (d) => xScale.bandwidth())
+     // chart.selectAll('rect')
+     //  .data(this.state.data)
+     //  .enter()
+     //  .append('rect')
+     //  .style("fill", (d) => {return colorBars(d.type)})
+     //  .style("opacity", .7)
+     //  .attr('x', (d) => xScale(d.date))
+     //  .attr('y', (d) => yScale(d.groceries))
+     //  // .attr("y", (d) => { return yScale(d[1]); })
+     //  // .transition() // a slight delay, see duration()
+     //  .attr('height', (d) => innerHeight - yScale(d.groceries))
+     //  // .attr("height", (d) => { return yScale(d[0]) - yScale(d[1]); })
+     //  // .duration(600)
+     //  .attr('width', (d) => xScale.bandwidth())
 
     // ==================================
     // Mouseover: make transluscent
@@ -294,7 +319,7 @@ export default class App extends Component {
         d3.select(this)
           .transition()
           .duration(300)
-          .attr('opacity', .5)
+          .attr('opacity', .7)
 
         let line = chart.append('line')
              .attr('id', 'indicator-line')
@@ -330,8 +355,8 @@ export default class App extends Component {
                .style("top", d3.event.pageY - 60 + "px")
                .style("display", "inline-block")
                .html(`
-                 ${d.date}</br>
-                 ${d.groceries}</br>
+                 ${d.data.date}</br>
+                 ${d.key}</br>
                  <p>(comment/memory about food this month)</p>`)
 
       })
