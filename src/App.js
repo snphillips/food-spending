@@ -43,9 +43,10 @@ export default class App extends Component {
           this.setState({data: data})
           // 2) raw data needs major manipulation
           this.valueStringToNumber()
-          this.addFoodTypeKeyValue()
           // this.addFoodTypeKey()
           this.adjustDateValue()
+          this.adjustForInflation()
+          this.addFoodTypeKeyValue()
           this.dailyToMonlyData()
           // console.log("this.state.data:", this.state.data)
           this.drawChart()
@@ -71,7 +72,28 @@ export default class App extends Component {
       this.state.data.forEach( (entry) => {
         entry.date = moment(entry.date).format("MMM YY");
       })
+      console.log("after adjust date value", this.state.data)
     }
+
+    // ==================================
+    // Adjust numbers for inflation
+    // ==================================
+    adjustForInflation() {
+      this.state.data.forEach( (entry) => {
+        // before 2015
+        if (entry.date.includes('14')) {
+          entry.value = (entry.value * 1.065)
+        } else if (entry.date.includes('15')) {
+          entry.value = (entry.value * 1.063)
+        } else if (entry.date.includes('16')) {
+          entry.value = (entry.value * 1.05)
+        } else if (entry.date.includes('17')) {
+          entry.value = (entry.value * 1.028)
+        }
+      })
+      console.log("after inflation", this.state.data)
+    }
+
 
     // ==================================
     // Adding key:value for different types of food spending
@@ -99,6 +121,8 @@ export default class App extends Component {
       })
       this.setState({data: newData})
      }
+
+
 
   // ==================================
   // The source data is daily, but we
