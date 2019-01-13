@@ -44,6 +44,7 @@ export default class App extends Component {
           // 2) raw data needs major manipulation
           this.valueStringToNumber()
           this.addFoodTypeKeyValue()
+          // this.addFoodTypeKey()
           this.adjustDateValue()
           this.dailyToMonlyData()
           // console.log("this.state.data:", this.state.data)
@@ -123,6 +124,11 @@ export default class App extends Component {
           let uniqueDates = _lodash.filter(this.state.data, (entry) => {
             return entry.date === date
           })
+
+         let spendingType = _lodash.filter(this.state.data, (entry) => {
+            return entry.type
+          })
+
           // sum the groceries according to every unique date
           let groceries = _lodash.sumBy(uniqueDates, (entry) => {
             return entry.groceries
@@ -177,7 +183,7 @@ export default class App extends Component {
       const svg = d3.select("svg")
 
       // define margins for some nice padding on the chart
-      const margin = {top: 20, right: 60, bottom: 60, left: 60};
+      const margin = {top: 40, right: 60, bottom: 60, left: 60};
       const width = svg.attr('width')
       const height = svg.attr('height')
       const innerWidth = width - margin.left - margin.right;
@@ -186,22 +192,23 @@ export default class App extends Component {
       const chart = svg.append("g")
                    .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-      console.log("margin.top", margin.top)
-      console.log("margin.left", margin.left)
+      const colors = ["#bf8b85","#5D5F71", "#634b66", "#9590a8", "#bbcbcb","#820933"]
+      const spendingType = ["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"]
 
     // ==================================
     // Layers for stacking
+    // see spendingType near top of drawChart
     // ==================================
-     let keys = (["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"])
-
      let stack = d3.stack()
-                   .keys(keys)
+                   .keys(spendingType)
                    // put the largest series on bottom.
                    .order(d3.stackOrderDescending)
 
+
     // Moving forward, d3 is using layers, as the data
     let layers = stack(this.state.data);
-    console.log("layers", layers);
+    console.log("layers:", layers);
+
 
 
     // ==================================
@@ -211,16 +218,16 @@ export default class App extends Component {
                     .append("div")
                     .attr("class", "tool-tip");
 
-
     // ==================================
     // Colors!
+    // See colors & spendingType variables at top of drawChart
     // ==================================
     let colorBars = d3.scaleOrdinal()
-                      .domain(["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"])
-                      .range(["#bf8b85","#5D5F71", "#634b66", "#9590a8", "#bbcbcb","#820933"]);
+                      .domain(spendingType)
+                      .range(colors)
 
     // ==================================
-    // Drawing the Scales & Axes
+    // Drawing the Scales & Axies
     // ==================================
       let yScale = d3.scaleLinear()
         // 1) Domain. the min and max value of domain(data)
@@ -254,6 +261,17 @@ export default class App extends Component {
         .style("text-anchor", "start");
 
     // ==================================
+    // Drawing the Gridlines
+    // ==================================
+    chart.append('g')
+      .attr('class', 'grid')
+      .call(d3.axisLeft().scale(yScale)
+                         .tickSize(-innerWidth, 0, 0)
+                         .tickFormat('')
+                         .ticks(40)
+      )
+
+    // ==================================
     // Drawing the Layers/Bars
     // ==================================
       let layer = chart.selectAll(".layer")
@@ -262,16 +280,13 @@ export default class App extends Component {
         .append("g")
         .attr("class", "layer")
         .style("fill", (d) => {return colorBars(d.key)})
-
+        // .attr("id", (d) => {return colorBars(d.key)})
 
       layer.selectAll("rect")
-       .data(function(d) {
-         return d;
-        })
+       .data((d) => { return d })
        .enter()
        .append("rect")
        .attr("class", "bar")
-       .attr("class", keys)
        .attr('x', (d) => xScale(d.data.date))
        .attr("y", (d) => {
          return yScale(d[1]);
@@ -291,7 +306,8 @@ export default class App extends Component {
         d3.select(this)
           .transition()
           .duration(300)
-          // .attr('opacity', .7)
+          .attr("stroke","red").attr("stroke-width",0.5)
+          .attr('opacity', .8)
       })
 
     // ==================================
@@ -302,9 +318,9 @@ export default class App extends Component {
          d3.select(this)
            .transition()
            .duration(300)
-           // .attr('opacity', 1)
-        // removing the indicator line
-         chart.selectAll('#indicator-line').remove()
+           .attr("stroke","red").attr("stroke-width",0)
+           .attr('opacity', 1)
+
       })
 
     // ==================================
@@ -316,30 +332,18 @@ export default class App extends Component {
                .style("display", "inline-block")
                .html(`
                  ${d.data.date}</br>
-                 ${d.data.name}</br>
                  $${d[1] - d[0]}</br>
-
-
                  <p>(comment/memory about food this month)</p>`)
 
       })
 
+                 // element.name ${element.name}</br>
 
     // ==================================
     // Tool Tip - off
     // ==================================
       chart.on("mouseout", (d) => { tooltip.style("display", "none");})
 
-    // ==================================
-    // Drawing the Gridlines
-    // ==================================
-    chart.append('g')
-      .attr('class', 'grid')
-      .call(d3.axisLeft().scale(yScale)
-                         .tickSize(-innerWidth, 0, 0)
-                         .tickFormat('')
-                         .ticks(40)
-      )
 
     // ==================================
     // Adding the left side label
@@ -354,6 +358,52 @@ export default class App extends Component {
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
          .text('US dollars adjusted for inflation')
+
+
+    // ==================================
+    // Legend
+    // ==================================
+      let legend = svg.selectAll(".legend")
+        .data(colors)
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", (d, index) => {
+          // return "translate(30," + i * 19 + ")";
+          return "translate(" +index * 90 + ", 0)";
+        });
+
+      // the tiny color swatches
+      legend.append("rect")
+        .attr("x", 0)
+        // .attr("x", innerWidth - 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", (d, index) => {
+          return colors.slice()[index];
+        });
+
+      legend.append("text")
+        .attr("x", 25)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "start")
+        .text(function(d, index) {
+          switch (index) {
+            case 0: return spendingType[0];
+            case 1: return spendingType[1];
+            case 2: return spendingType[2];
+            case 3: return spendingType[3];
+            case 4: return spendingType[4];
+            case 5: return spendingType[5];
+          }
+        });
+
+
+
+
+
+
+
     }
 
 

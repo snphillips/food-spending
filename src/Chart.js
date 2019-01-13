@@ -14,7 +14,3 @@ export default class Chart extends Component {
     );
   }
 }
-
-      // <svg width="1100"
-           // height="500">
-      // </svg>

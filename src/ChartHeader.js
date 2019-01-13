@@ -8,7 +8,6 @@ export default class ChartHeader extends Component {
         <h1 id="chart-header">
           Five Years of Food Spending
         </h1>
-
       </div>
 
 
