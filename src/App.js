@@ -50,6 +50,7 @@ export default class App extends Component {
           this.addFoodTypeKeyValue()
           this.dailyToMonlyData()
           this.turnUndefinedInto0()
+          this.addFoodMemoryToData()
           // console.log("this.state.data:", this.state.data)
           this.drawChart()
       }).catch(function(error){
@@ -88,8 +89,14 @@ export default class App extends Component {
       this.state.data.forEach( (entry) => {
         entry.date = moment(entry.date).format("MMM YYYY");
       })
-      console.log("after adjust date value", this.state.data)
+      // console.log("after adjust date", this.state.data)
+
+      this.state.commentData.forEach( (entry) => {
+        entry.date = moment(entry.date).format("MMM YYYY");
+      })
+      console.log("after adjust date commentData", this.state.commentData)
     }
+
 
     // ==================================
     // Adjust numbers for inflation
@@ -109,7 +116,7 @@ export default class App extends Component {
           entry.value = (entry.value * 1.028)
         }
       })
-      console.log("after inflation", this.state.data)
+      // console.log("after inflation", this.state.data)
     }
 
     turnUndefinedInto0() {
@@ -181,9 +188,9 @@ export default class App extends Component {
             return entry.date === date
           })
 
-         let spendingType = _lodash.filter(this.state.data, (entry) => {
-            return entry.type
-          })
+         // let spendingType = _lodash.filter(this.state.data, (entry) => {
+         //    return entry.type
+         //  })
 
           // sum the groceries according to every unique date
           let groceries = _lodash.sumBy(uniqueDates, (entry) => {
@@ -221,8 +228,31 @@ export default class App extends Component {
        }
       })
        this.setState({data: newData})
-       console.log("newData:", newData)
+       // console.log("after monthly totals:", newData)
      }
+
+
+   // ==================================
+   // Getting the memory from one dataset
+   // and adding it to the main dataset
+   // ==================================
+  addFoodMemoryToData() {
+    this.state.data.forEach( (entry) => {
+
+    // filter() creates new array with all elements that pass a "test"
+      let tempResult = this.state.commentData.filter( (memoryEntry) => {
+
+        // In this case, the "test" is, are both dates the same?
+        const result = (entry.date === memoryEntry.date);
+        return result
+      })
+        // Yes? cool. Then for the current entry we're on, give it a key of comment,
+        // and assign it the value of the comment in our tempResult.
+        // Now put that result into entry, and move onto the next one
+        entry.comment = tempResult[0].comment
+    console.log("after food memory:", this.state.data)
+    });
+  }
 
 
 
@@ -241,7 +271,7 @@ export default class App extends Component {
       const sidebarSVG = d3.select("#legend-sidebar")
 
       // define margins for some nice padding on the chart
-      const margin = {top: 40, right: 10, bottom: 45, left: 60};
+      const margin = {top: 40, right: 10, bottom: 45, left: 20};
       const width = svg.attr('width')
       const height = svg.attr('height')
       const innerWidth = width - margin.left - margin.right;
@@ -266,7 +296,7 @@ export default class App extends Component {
                    .order(d3.stackOrderDescending)
 
 
-    // Moving forward, d3 is using layers, as the data
+    // Moving forward, d3 is using "layers" as the data
     let layers = stack(this.state.data);
     console.log("layers:", layers);
 
@@ -390,13 +420,12 @@ export default class App extends Component {
         tooltip.style("left", d3.event.pageX + 15 + "px")
                .style("top", d3.event.pageY - 60 + "px")
                .style("display", "inline-block")
-               // TODO figure out how to show correct comment
-               // likely add column to data earlier on
                .html(`
                  ${d.data.date}</br>
                  $${Math.round(d[1] - d[0]).toFixed(2)}</br></br>
                  Total spending for the month $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
-                 <p>${this.state.commentData[0].comment}</p>
+                 <p>Food Memory:</p>
+                 <p>${d.data.comment}</p>
                  `)
 
       })
@@ -419,7 +448,7 @@ export default class App extends Component {
          // adjust up and down
          .attr('x', -(innerHeight / 1.5) )
          // adjust side to side
-         .attr('y', 12 )
+         .attr('y', -25 )
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
          .text('US dollars adjusted for inflation')
@@ -434,7 +463,6 @@ export default class App extends Component {
         .attr("class", "legend-sidebar")
         .attr("transform", (d, index) => {
           return "translate(0," + index * 19 + ")";
-          // return "translate(" +index * 90 + ", 0)";
         });
 
       // the tiny color swatches
@@ -451,6 +479,7 @@ export default class App extends Component {
         .attr("x", 18)
         .attr("y", 7)
         .attr("dy", ".35em")
+        .attr("class", "legend-text")
         .style("text-anchor", "start")
         .text(function(d, index) {
           switch (index) {

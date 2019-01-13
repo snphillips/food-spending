@@ -1,9 +1,6 @@
 
 @import url(https://fonts.googleapis.com/css?family=Acme);
-@import url(https://fonts.googleapis.com/css?family=Coiny);
-@import url(https://fonts.googleapis.com/css?family=Courgette);
 @import url(https://fonts.googleapis.com/css?family=Shrikhand);
-@import url(https://fonts.googleapis.com/css?family=Slabo+27px);
 @import url(https://fonts.googleapis.com/css?family=Spicy+Rice);
 @import url(https://fonts.googleapis.com/css?family=Staatliches);
 
@@ -11,9 +8,10 @@
 General Styling
 ====================================== */
 body {
-  padding: 2rem;
-  font-family: sans-serif;
+  /*padding: 1.5rem;*/
+  /*font-family: 'Acme', sans-serif;*/
   font-size: 100%;
+  /* dark theme */
   /*background-color: ;*/
 }
 
@@ -26,50 +24,48 @@ a:hover {
 }
 
 /* =================================
-Sidebar General
+Sidebar
 ==================================== */
 .sidebar {
   height: 100%;
   top: 0;
   left: 0;
   overflow-x: hidden;
-  padding: 1rem 1rem 0 1rem;
+  padding: 1.5rem 1rem 0 1rem;
   background-color: rgba(242, 242, 242, .5); /* light gray*/
+  /* dark theme */
+  /* background-color: ;*/
 }
+
+ h1#header {
+   font-size: 140%;
+   margin: 0 0 1rem 0;
+   font-family: 'Acme', sans-serif;
+   font-family: 'Shrikhand', cursive;
+   font-family: 'Staatliches', cursive;
+   font-family: 'Spicy Rice', cursive;
+   /* dark theme */
+   /*color: ;*/
+ }
 
 svg#legend-sidebar {
   /*border: 1px solid red;*/
 }
 
-h1#header {
-  font-family: 'Satisfy', cursive;
-  font-size: 200%;
-  margin: 0 0 1rem 0;
+.legend-text {
+  font-size: 90%;
+  font-family: sans-serif;
 }
 
 .sidebar-text, .sidebar-link{
   font-size: 90%;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
-form {
-  margin-top: 1rem;
-}
 
- h1#header {
-   font-size: 150%;
-   /*margin-bottom: 0;*/
-   /*margin-top: 0;*/
-   font-family: 'Staatliches', cursive;
-   font-family: 'Coiny', cursive;
-   font-family: 'Slabo 27px', serif;
-   font-family: 'Acme', sans-serif;
-   font-family: 'Spicy Rice', cursive;
-   font-family: 'Courgette', cursive;
-   font-family: 'Shrikhand', cursive;
- }
 
- /* ===================================
+
+/* ===================================
 Chart
 ====================================== */
   svg#chart {
@@ -125,13 +121,7 @@ li {
   padding-left: 0;
 }
 
-/* ===================================
-Legend
-====================================== */
-.legend {
-  background-color: red;
-  font-size: 80%;
-}
+
 
 
 /* ===================================
