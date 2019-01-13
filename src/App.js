@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import _lodash from 'lodash';
 import moment from 'moment';
-// import data from './data/data.csv';
 import dataAll from './data/dataAll.csv';
+import comments from './data/comments.csv';
 import Chart from './Chart';
 import ChartHeader from './ChartHeader';
 import Footer from './Footer';
@@ -14,6 +14,7 @@ export default class App extends Component {
 
     this.state = {
       data: [],
+      commentData: [],
     }
 
   //  ==================================
@@ -28,6 +29,7 @@ export default class App extends Component {
    // Component Did Mount
    // ********************************
    componentDidMount(){
+    this.getCommentData()
     this.getData()
     this.drawChart()
    }
@@ -43,13 +45,27 @@ export default class App extends Component {
           this.setState({data: data})
           // 2) raw data needs major manipulation
           this.valueStringToNumber()
-          // this.addFoodTypeKey()
           this.adjustDateValue()
           this.adjustForInflation()
           this.addFoodTypeKeyValue()
           this.dailyToMonlyData()
+          this.turnUndefinedInto0()
           // console.log("this.state.data:", this.state.data)
           this.drawChart()
+      }).catch(function(error){
+      // handle error
+      })
+    }
+
+    //  ==================================
+    //  Get comment data
+    //  ==================================
+    getCommentData() {
+      d3.csv(comments)
+        .then((comments) => {
+          // 1) set state with data
+          this.setState({commentData: comments})
+          console.log("commentData", this.state.commentData)
       }).catch(function(error){
       // handle error
       })
@@ -80,7 +96,9 @@ export default class App extends Component {
     // ==================================
     adjustForInflation() {
       this.state.data.forEach( (entry) => {
-        // before 2015
+
+        // For each entry, if a date contains a certain year,
+        // adjust the value of spending, accounting for inflation
         if (entry.date.includes('14')) {
           entry.value = (entry.value * 1.065)
         } else if (entry.date.includes('15')) {
@@ -92,6 +110,20 @@ export default class App extends Component {
         }
       })
       console.log("after inflation", this.state.data)
+    }
+
+    turnUndefinedInto0() {
+      this.state.data.forEach( (entry) => {
+        // if an entry doesn't exist, it gets a value of NaN.
+        // We can't have that, so we must turn those NaNs into 0
+        if (entry.groceries == null) { entry.groceries = 0}
+        if (entry.dinner == null) { entry.dinner = 0}
+        if (entry.lunch == null) { entry.lunch = 0}
+        if (entry.breakfast == null) { entry.breakfast = 0}
+        if (entry.snack == null) { entry.snack = 0}
+        if (entry.coffee == null) { entry.coffee = 0}
+        return entry
+      })
     }
 
 
@@ -216,7 +248,10 @@ export default class App extends Component {
       const chart = svg.append("g")
                    .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-      const colors = ["#bf8b85","#5D5F71", "#634b66", "#9590a8", "#bbcbcb","#820933"]
+      // const colors = ["#bf8b85","#5D5F71", "#634b66", "#9590a8", "#bbcbcb","#820933"]
+      // const colors = ["#B2E2A5","#DABECA", "#BF8B85", "#DE6B48", "#7F829B","#820933"]
+      const colors = ["#6F75AA","#820933", "#48DBDB", "#AA3E98", "#F2653A","#5B2333"]
+      // const colors = ["#820933","#F79F79", "#F7D08A", "#E3F09B", "#87B6A7","#5B5941"]
       const spendingType = ["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"]
 
     // ==================================
@@ -278,6 +313,7 @@ export default class App extends Component {
        .call(d3.axisBottom(xScale))
        // angling the labels 45 degrees
         .selectAll("text")
+        .attr("class", "x-scale")
         .attr("y", 0)
         .attr("x", 9)
         .attr("dy", ".95em")
@@ -304,7 +340,6 @@ export default class App extends Component {
         .append("g")
         .attr("class", "layer")
         .style("fill", (d) => {return colorBars(d.key)})
-        // .attr("id", (d) => {return colorBars(d.key)})
 
       layer.selectAll("rect")
        .data((d) => { return d })
@@ -326,7 +361,6 @@ export default class App extends Component {
     // note: don't use an arrow function here
     // ==================================
       .on("mouseover", function(d) {
-        console.log("bar hover", this)
         d3.select(this)
           .transition()
           .duration(300)
@@ -354,10 +388,14 @@ export default class App extends Component {
         tooltip.style("left", d3.event.pageX + 15 + "px")
                .style("top", d3.event.pageY - 60 + "px")
                .style("display", "inline-block")
+               // TODO figure out how to show correct comment
+               // likely add column to data earlier on
                .html(`
                  ${d.data.date}</br>
                  $${d[1] - d[0]}</br>
-                 <p>(comment/memory about food this month)</p>`)
+                 Total spending for the month $${d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee}</br>
+                 <p>${this.state.commentData[0].comment}</p>
+                 `)
 
       })
 
@@ -365,13 +403,14 @@ export default class App extends Component {
 
     // ==================================
     // Tool Tip - off
+    // tool tip needs to be turned off to start
     // ==================================
       chart.on("mouseout", (d) => { tooltip.style("display", "none");})
 
 
     // ==================================
     // Adding the left side label
-    // (no label on bottom...too obvious)
+    // (no label needed on bottom...too obvious)
     // ==================================
     // left side label
       svg.append('text')
@@ -400,15 +439,15 @@ export default class App extends Component {
       legend.append("rect")
         .attr("x", 0)
         // .attr("x", innerWidth - 18)
-        .attr("width", 18)
-        .attr("height", 18)
+        .attr("width", 14)
+        .attr("height", 14)
         .style("fill", (d, index) => {
           return colors.slice()[index];
         });
 
       legend.append("text")
-        .attr("x", 25)
-        .attr("y", 9)
+        .attr("x", 18)
+        .attr("y", 7)
         .attr("dy", ".35em")
         .style("text-anchor", "start")
         .text(function(d, index) {
@@ -430,14 +469,6 @@ export default class App extends Component {
 
     }
 
-
-
-
-
-
-
-
-
   //  ==================================
   //  And finally, the render
   //  ==================================
@@ -451,4 +482,3 @@ export default class App extends Component {
     );
   }
 }
-        // <RechartsChart />

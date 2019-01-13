@@ -36,9 +36,9 @@ Chart Header
    font-family: 'Coiny', cursive;
    font-family: 'Slabo 27px', serif;
    font-family: 'Acme', sans-serif;
-   font-family: 'Shrikhand', cursive;
-   font-family: 'Courgette', cursive;
    font-family: 'Spicy Rice', cursive;
+   font-family: 'Courgette', cursive;
+   font-family: 'Shrikhand', cursive;
  }
 
  /* ===================================
@@ -62,6 +62,10 @@ Chart
 }
 .grid path {
       /*stroke-width: 0;*/
+}
+
+.x-scale {
+  font-weight: bold;
 }
 
 /* ===================================

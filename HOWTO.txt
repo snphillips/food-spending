@@ -1,5 +1,9 @@
 
 
+$ npm run build
+$ cd build
+$ surge --domain https://5yearsfood.surge.sh/
+
 
 
 
