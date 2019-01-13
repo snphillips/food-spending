@@ -5,7 +5,7 @@ import moment from 'moment';
 import dataAll from './data/dataAll.csv';
 import comments from './data/comments.csv';
 import Chart from './Chart';
-import ChartHeader from './ChartHeader';
+import Sidebar from './Sidebar';
 import Footer from './Footer';
 
 export default class App extends Component {
@@ -86,7 +86,7 @@ export default class App extends Component {
     // ==================================
     adjustDateValue() {
       this.state.data.forEach( (entry) => {
-        entry.date = moment(entry.date).format("MMM YY");
+        entry.date = moment(entry.date).format("MMM YYYY");
       })
       console.log("after adjust date value", this.state.data)
     }
@@ -236,10 +236,12 @@ export default class App extends Component {
     // ==================================
      drawChart() {
       // select the <svg> element in the HTML file with d3 select
-      const svg = d3.select("svg")
+      // const svg = d3.select("svg")
+      const svg = d3.select("#chart")
+      const sidebarSVG = d3.select("#legend-sidebar")
 
       // define margins for some nice padding on the chart
-      const margin = {top: 40, right: 60, bottom: 60, left: 60};
+      const margin = {top: 40, right: 10, bottom: 45, left: 60};
       const width = svg.attr('width')
       const height = svg.attr('height')
       const innerWidth = width - margin.left - margin.right;
@@ -316,7 +318,7 @@ export default class App extends Component {
         .attr("class", "x-scale")
         .attr("y", 0)
         .attr("x", 9)
-        .attr("dy", ".95em")
+        // .attr("dy", "1.5em")
         .attr("transform", "rotate(45)")
         .style("text-anchor", "start");
 
@@ -365,7 +367,7 @@ export default class App extends Component {
           .transition()
           .duration(300)
           .attr("stroke","red").attr("stroke-width",0.5)
-          .attr('opacity', .8)
+          .attr('opacity', .6)
       })
 
     // ==================================
@@ -392,8 +394,8 @@ export default class App extends Component {
                // likely add column to data earlier on
                .html(`
                  ${d.data.date}</br>
-                 $${d[1] - d[0]}</br>
-                 Total spending for the month $${d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee}</br>
+                 $${Math.round(d[1] - d[0]).toFixed(2)}</br></br>
+                 Total spending for the month $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
                  <p>${this.state.commentData[0].comment}</p>
                  `)
 
@@ -426,13 +428,13 @@ export default class App extends Component {
     // ==================================
     // Legend
     // ==================================
-      let legend = svg.selectAll(".legend")
+      let legend = sidebarSVG.selectAll("#legend-sidebar")
         .data(colors)
         .enter().append("g")
-        .attr("class", "legend")
+        .attr("class", "legend-sidebar")
         .attr("transform", (d, index) => {
-          // return "translate(30," + i * 19 + ")";
-          return "translate(" +index * 90 + ", 0)";
+          return "translate(0," + index * 19 + ")";
+          // return "translate(" +index * 90 + ", 0)";
         });
 
       // the tiny color swatches
@@ -453,11 +455,11 @@ export default class App extends Component {
         .text(function(d, index) {
           switch (index) {
             case 0: return spendingType[0];
-            case 1: return spendingType[1];
-            case 2: return spendingType[2];
-            case 3: return spendingType[3];
-            case 4: return spendingType[4];
-            case 5: return spendingType[5];
+            case 1: return spendingType[1] + " out";
+            case 2: return spendingType[2] + " out";
+            case 3: return spendingType[3] + " out";
+            case 4: return spendingType[4] + " out";
+            case 5: return spendingType[5] + " out";
           }
         });
 
@@ -474,10 +476,16 @@ export default class App extends Component {
   //  ==================================
   render() {
     return (
-      <div className="App">
-        <ChartHeader />
-        <Chart />
-        <Footer />
+      <div className="App row">
+
+        <div className="sidebar-container col-xs-12 col-sm-4 col-md-2 col-lg-2 col-xl-2">
+          <Sidebar />
+        </div>
+
+        <div className="chart-container col-xs-12 col-sm-8 col-md-10 col-lg-10 col-xl-10">
+          <Chart />
+          <Footer />
+        </div>
       </div>
     );
   }
