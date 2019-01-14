@@ -418,13 +418,12 @@ export default class App extends Component {
     // ==================================
       .on("mousemove", (d) => {
         tooltip.style("left", d3.event.pageX + 15 + "px")
-               .style("top", d3.event.pageY - 60 + "px")
+               .style("top", d3.event.pageY - 180 + "px")
                .style("display", "inline-block")
                .html(`
                  ${d.data.date}</br>
                  $${Math.round(d[1] - d[0]).toFixed(2)}</br></br>
-                 Total spending for the month $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
-                 <p>Food Memory:</p>
+                 Monthly Spending Total: $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
                  <p>${d.data.comment}</p>
                  `)
 
