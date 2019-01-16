@@ -15,14 +15,17 @@ export default class Sidebar extends Component {
             height="120">
           </svg>
 
-        <p className="sidebar-text">Average Food Spending:</p>
+          <hr/>
 
-        <ul>
-          <li>${this.props.yearlyAverageTotal} /year</li>
-          <li>${this.props.monthlyAverageTotal} /month</li>
-        </ul>
+          <h2 className="sidebar-section-header">Avg Food Spending:</h2>
+          <ul>
+            <li>${this.props.yearlyAverageTotal} /year</li>
+            <li>${this.props.monthlyAverageTotal} /month</li>
+          </ul>
 
-        <p className="sidebar-text">Average Monthly Breakdown:</p>
+          <hr/>
+
+          <h2 className="sidebar-section-header">Avg Monthly Breakdown:</h2>
           <ul>
             <li>groceries:</li>
             <li>dinner out:</li>
