@@ -1,35 +1,18 @@
 
-http://www.adeveloperdiary.com/d3-js/create-stacked-bar-chart-using-d3-js/
-
-https://bl.ocks.org/romsson/8aea86fddcf01380eb96a341509f394f
-
-http://bl.ocks.org/KatiRG/5f168b5c884b1f9c36a5
-
 
 GENERAL
-
 - chronological button
-- add a sidebar? (and if so, bootrap it)
-- tooltip, add total spening
-- round numbers in tooltip spending
-- turn NANs into 0
-
-
+- compare cc notes to spending
+-
 
 
 DATA
-- adjust for inflation
-  2014: 6.5%   1.065
-  2015: 6.3%   1.063
-  2016: 5%     1.05
-  2017: 2.8%   1.028
-
-- calculate average
+- calculate averages
 
 
 
 STYLING
-
 - choose better colors
-- bottom legend bold
-- legend better (sqauare smaller)
+- static tooltip?
+- improve colors
+- little design between legend & <p>

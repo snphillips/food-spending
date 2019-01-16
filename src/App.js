@@ -15,6 +15,20 @@ export default class App extends Component {
     this.state = {
       data: [],
       commentData: [],
+      yearlyAverageTotal: '',
+      yearlyAverageGroceries: '',
+      yearlyAverageDinner: '',
+      yearlyAverageLunch: '',
+      yearlyAverageBreakfast: '',
+      yearlyAverageSnack: '',
+      yearlyAverageCoffee: '',
+      monthlyAverageTotal: '',
+      monthlyAverageGroceries: '',
+      monthlyAverageDinner: '',
+      monthlyAverageLunch: '',
+      monthlyAverageBreakfast: '',
+      monthlyAverageSnack: '',
+      monthlyAverageCoffee: ''
     }
 
   //  ==================================
@@ -43,15 +57,16 @@ export default class App extends Component {
         .then((data) => {
           // 1) set state with data
           this.setState({data: data})
+          console.log("this.state.data:", this.state.data)
           // 2) raw data needs major manipulation
           this.valueStringToNumber()
           this.adjustDateValue()
           this.adjustForInflation()
+          this.calculateTotalAverages()
           this.addFoodTypeKeyValue()
           this.dailyToMonlyData()
           this.turnUndefinedInto0()
           this.addFoodMemoryToData()
-          // console.log("this.state.data:", this.state.data)
           this.drawChart()
       }).catch(function(error){
       // handle error
@@ -79,6 +94,24 @@ export default class App extends Component {
       this.state.data.forEach( (entry) => {
         entry.value = +entry.value;
       })
+    }
+
+    calculateTotalAverages() {
+      let yearlyAverageTotal = Math.round(_lodash.sumBy(this.state.data, (d) => {
+        return d.value
+      }) / 5).toFixed(2)
+
+      let monthlyAverageTotal = Math.round(_lodash.sumBy(this.state.data, (d) => {
+        return d.value
+      }) / 60).toFixed(2)
+
+      this.setState({
+        yearlyAverageTotal: yearlyAverageTotal,
+        monthlyAverageTotal:  monthlyAverageTotal,
+
+      })
+      console.log("yearlyAverageTotal", this.state.yearlyAverageTotal)
+      console.log("monthlyAverageTotal", this.state.monthlyAverageTotal)
     }
 
     // ==================================
@@ -250,9 +283,10 @@ export default class App extends Component {
         // and assign it the value of the comment in our tempResult.
         // Now put that result into entry, and move onto the next one
         entry.comment = tempResult[0].comment
-    console.log("after food memory:", this.state.data)
     });
   }
+
+
 
 
 
@@ -282,8 +316,9 @@ export default class App extends Component {
 
       // const colors = ["#bf8b85","#5D5F71", "#634b66", "#9590a8", "#bbcbcb","#820933"]
       // const colors = ["#B2E2A5","#DABECA", "#BF8B85", "#DE6B48", "#7F829B","#820933"]
-      const colors = ["#6F75AA","#820933", "#48DBDB", "#AA3E98", "#F2653A","#5B2333"]
       // const colors = ["#820933","#F79F79", "#F7D08A", "#E3F09B", "#87B6A7","#5B5941"]
+      // const colors = ["#6F75AA","#820933", "#48DBDB", "#AA3E98", "#70a5a3","#ef6839"]
+      const colors = ["#6F75AA","#F79F79", "#E3F09B", "#AA3E98", "#70a5a3","#E85D75"]
       const spendingType = ["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"]
 
     // ==================================
@@ -380,6 +415,8 @@ export default class App extends Component {
        .attr("class", "bar")
        .attr('x', (d) => xScale(d.data.date))
        .attr("y", (d) => {
+        // This is stacked bar chart stuff
+        // if you look at the data, you'll see what d[0] & d[1] refer to
          return yScale(d[1]);
        })
        .attr("height", function(d) {
@@ -396,7 +433,7 @@ export default class App extends Component {
         d3.select(this)
           .transition()
           .duration(300)
-          .attr("stroke","red").attr("stroke-width",0.5)
+          .attr("stroke","white").attr("stroke-width",0.5)
           .attr('opacity', .6)
       })
 
@@ -408,7 +445,7 @@ export default class App extends Component {
          d3.select(this)
            .transition()
            .duration(300)
-           .attr("stroke","red").attr("stroke-width",0)
+           .attr("stroke","white").attr("stroke-width",0)
            .attr('opacity', 1)
 
       })
@@ -417,8 +454,11 @@ export default class App extends Component {
     // Tool Tip
     // ==================================
       .on("mousemove", (d) => {
-        tooltip.style("left", d3.event.pageX + 15 + "px")
-               .style("top", d3.event.pageY - 180 + "px")
+        tooltip
+               .style("left", d3.event.pageX - 310 + "px")
+               // .style("left", 315 + "px")
+               .style("top", d3.event.pageY - 50 + "px")
+               // .style("top", 50 + "px")
                .style("display", "inline-block")
                .html(`
                  ${d.data.date}</br>
@@ -444,6 +484,7 @@ export default class App extends Component {
     // ==================================
     // left side label
       svg.append('text')
+         .attr('class', 'left-chart-label')
          // adjust up and down
          .attr('x', -(innerHeight / 1.5) )
          // adjust side to side
@@ -506,12 +547,15 @@ export default class App extends Component {
     return (
       <div className="App row">
 
-        <div className="sidebar-container col-xs-12 col-sm-4 col-md-2 col-lg-2 col-xl-2">
-          <Sidebar />
+        <div className="sidebar-container col-xs-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
+          <Sidebar yearlyAverageTotal={this.state.yearlyAverageTotal}
+                   monthlyAverageTotal={this.state.monthlyAverageTotal}
+          />
         </div>
 
-        <div className="chart-container col-xs-12 col-sm-8 col-md-10 col-lg-10 col-xl-10">
+        <div className="chart-container col-xs-12 col-sm-12 col-md-9 col-lg-10 col-xl-10">
           <Chart />
+          <br/>
           <Footer />
         </div>
       </div>
