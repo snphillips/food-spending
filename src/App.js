@@ -502,7 +502,8 @@ export default class App extends Component {
                .html(`
                  <h3>${d.data.date}</h3>
                  $${Math.round(d[1] - d[0]).toFixed(2)}</br>
-                 Monthly Total: $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
+                 Monthly Total All Types: $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
+                 <hr/>
                  <p id="comment">${d.data.comment}</p>
                  `)
 

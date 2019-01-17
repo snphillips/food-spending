@@ -19,7 +19,7 @@ export default class Sidebar extends Component {
 
           <hr/>
 
-          <h2 className="sidebar-section-header">Avg Food Spending:</h2>
+          <h2 className="sidebar-section-header">Avg Food Spending</h2>
           <ul>
             <li>${this.props.yearlyAverageTotal} /year</li>
             <li>${this.props.monthlyAverageTotal} /month</li>
@@ -27,7 +27,7 @@ export default class Sidebar extends Component {
 
           <hr/>
 
-          <h2 className="sidebar-section-header">Avg Monthly Breakdown:</h2>
+          <h2 className="sidebar-section-header">Avg Monthly Breakdown</h2>
           <ul>
             <li>groceries: ${this.props.monthlyAverageGroceries}</li>
             <li>dinner out: ${this.props.monthlyAverageDinner}</li>

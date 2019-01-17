@@ -49,7 +49,7 @@ Sidebar
  h1#header {
    font-size: 150%;
    margin: 0 0 1.5rem 0;
-   font-family: 'Staatliches', cursive;
+   font-family: 'Staatliches', sans-serif;
    color: #ffffff;
    text-shadow: 4px 3px 0px #7A7A7A;
  }
@@ -71,7 +71,8 @@ text.legend-text {
 }
 
 h2 {
-  font-size: 80%;
+  font-family: 'Staatliches', sans-serif;
+  font-size: 90%;
 }
 
 hr {
@@ -81,9 +82,10 @@ hr {
 
 ul {
   font-size: 80%;
-  list-style-position: inside;
+  /*list-style-position: inside;*/
   margin-left: 0;
-  padding-left: 0;
+  padding-left: 1rem;
+  /*list-style-type: none;*/
 }
 
 li {
