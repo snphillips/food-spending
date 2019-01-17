@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import _lodash from 'lodash';
 import moment from 'moment';
-import dataAll from './data/dataAll.csv';
+import data from './data/data.csv';
 import comments from './data/comments.csv';
 import Chart from './Chart';
 import Sidebar from './Sidebar';
@@ -16,12 +16,6 @@ export default class App extends Component {
       data: [],
       commentData: [],
       yearlyAverageTotal: '',
-      yearlyAverageGroceries: '',
-      yearlyAverageDinner: '',
-      yearlyAverageLunch: '',
-      yearlyAverageBreakfast: '',
-      yearlyAverageSnack: '',
-      yearlyAverageCoffee: '',
       monthlyAverageTotal: '',
       monthlyAverageGroceries: '',
       monthlyAverageDinner: '',
@@ -53,11 +47,10 @@ export default class App extends Component {
     //  Get the data
     //  ==================================
     getData() {
-      d3.csv(dataAll)
+      d3.csv(data)
         .then((data) => {
           // 1) set state with data
           this.setState({data: data})
-          console.log("this.state.data:", this.state.data)
           // 2) raw data needs major manipulation
           this.valueStringToNumber()
           this.adjustDateValue()
@@ -68,6 +61,8 @@ export default class App extends Component {
           this.turnUndefinedInto0()
           this.addFoodMemoryToData()
           this.drawChart()
+          this.calculateBreakdownAverages()
+          console.log("this.state.data:", this.state.data)
       }).catch(function(error){
       // handle error
       })
@@ -108,10 +103,54 @@ export default class App extends Component {
       this.setState({
         yearlyAverageTotal: yearlyAverageTotal,
         monthlyAverageTotal:  monthlyAverageTotal,
-
       })
+
       console.log("yearlyAverageTotal", this.state.yearlyAverageTotal)
       console.log("monthlyAverageTotal", this.state.monthlyAverageTotal)
+    }
+
+    calculateBreakdownAverages() {
+
+      let monthlyAverageGroceries = Math.round(_lodash.sumBy(this.state.data, (d) => {
+        return d.groceries
+      }) /5 /12) .toFixed(2)
+
+      let monthlyAverageDinner = Math.round(_lodash.sumBy(this.state.data, (d) => {
+        return d.dinner
+      }) /5 /12).toFixed(2)
+
+      let monthlyAverageLunch = Math.round(_lodash.sumBy(this.state.data, (d) => {
+        return d.lunch
+      }) /5 /12).toFixed(2)
+
+     let monthlyAverageBreakfast = Math.round(_lodash.sumBy(this.state.data, (d) => {
+        return d.breakfast
+      }) /5 /12).toFixed(2)
+
+      let monthlyAverageSnack = Math.round(_lodash.sumBy(this.state.data, (d) => {
+        return d.snack
+      }) /5 /12).toFixed(2)
+
+      let monthlyAverageCoffee = Math.round(_lodash.sumBy(this.state.data, (d) => {
+        return d.coffee
+      }) /5 /12).toFixed(2)
+
+      this.setState({
+        monthlyAverageGroceries: monthlyAverageGroceries,
+        monthlyAverageDinner: monthlyAverageDinner,
+        monthlyAverageLunch: monthlyAverageLunch,
+        monthlyAverageBreakfast: monthlyAverageBreakfast,
+        monthlyAverageSnack: monthlyAverageSnack,
+        monthlyAverageCoffee: monthlyAverageCoffee,
+      })
+
+      console.log("monthlyAverageGroceries", this.state.monthlyAverageGroceries)
+      console.log("monthlyAverageDinner", this.state.monthlyAverageDinner)
+      console.log("monthlyAverageLunch", this.state.monthlyAverageLunch)
+      console.log("monthlyAverageBreakfast", this.state.monthlyAverageBreakfast)
+      console.log("monthlyAverageSnack", this.state.monthlyAverageSnack)
+      console.log("monthlyAverageCoffee", this.state.monthlyAverageCoffee)
+
     }
 
     // ==================================
@@ -184,7 +223,7 @@ export default class App extends Component {
           newKey.lunch = entry.value
         } else if (entry.type === 'breakfast out') {
           newKey.breakfast = entry.value
-        } else if (entry.type === 'coffee') {
+        } else if (entry.type === 'coffee out') {
           newKey.coffee = entry.value
         } else if (entry.type === 'snack out') {
           newKey.snack = entry.value
@@ -319,7 +358,7 @@ export default class App extends Component {
       // const colors = ["#820933","#F79F79", "#F7D08A", "#E3F09B", "#87B6A7","#5B5941"]
       // const colors = ["#6F75AA","#820933", "#48DBDB", "#AA3E98", "#70a5a3","#ef6839"]
       const colors = ["#6F75AA","#F79F79", "#E3F09B", "#AA3E98", "#70a5a3","#E85D75"]
-      const spendingType = ["groceries", "dinner", "lunch", "breakfast", "snack", "coffee"]
+      const spendingType = ["groceries", "dinner", "lunch", "snack", "breakfast", "coffee"]
 
     // ==================================
     // Layers for stacking
@@ -461,10 +500,10 @@ export default class App extends Component {
                // .style("top", 50 + "px")
                .style("display", "inline-block")
                .html(`
-                 ${d.data.date}</br>
-                 $${Math.round(d[1] - d[0]).toFixed(2)}</br></br>
-                 Monthly Spending Total: $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
-                 <p>${d.data.comment}</p>
+                 <h3>${d.data.date}</h3>
+                 $${Math.round(d[1] - d[0]).toFixed(2)}</br>
+                 Monthly Total: $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
+                 <p id="comment">${d.data.comment}</p>
                  `)
 
       })
@@ -532,12 +571,6 @@ export default class App extends Component {
           }
         });
 
-
-
-
-
-
-
     }
 
   //  ==================================
@@ -550,6 +583,12 @@ export default class App extends Component {
         <div className="sidebar-container col-xs-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
           <Sidebar yearlyAverageTotal={this.state.yearlyAverageTotal}
                    monthlyAverageTotal={this.state.monthlyAverageTotal}
+                   monthlyAverageGroceries={this.state.monthlyAverageGroceries}
+                   monthlyAverageDinner={this.state.monthlyAverageDinner}
+                   monthlyAverageLunch={this.state.monthlyAverageLunch}
+                   monthlyAverageBreakfast={this.state.monthlyAverageBreakfast}
+                   monthlyAverageSnack={this.state.monthlyAverageSnack}
+                   monthlyAverageCoffee={this.state.monthlyAverageCoffee}
           />
         </div>
 
