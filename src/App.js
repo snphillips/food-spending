@@ -92,11 +92,11 @@ export default class App extends Component {
     }
 
     calculateTotalAverages() {
-      let yearlyAverageTotal = Math.round(_lodash.sumBy(this.state.data, (d) => {
+      let yearlyAverageTotal = (_lodash.sumBy(this.state.data, (d) => {
         return d.value
       }) / 5).toFixed(2)
 
-      let monthlyAverageTotal = Math.round(_lodash.sumBy(this.state.data, (d) => {
+      let monthlyAverageTotal = (_lodash.sumBy(this.state.data, (d) => {
         return d.value
       }) / 60).toFixed(2)
 
@@ -111,27 +111,27 @@ export default class App extends Component {
 
     calculateBreakdownAverages() {
 
-      let monthlyAverageGroceries = Math.round(_lodash.sumBy(this.state.data, (d) => {
+      let monthlyAverageGroceries = (_lodash.sumBy(this.state.data, (d) => {
         return d.groceries
       }) /5 /12) .toFixed(2)
 
-      let monthlyAverageDinner = Math.round(_lodash.sumBy(this.state.data, (d) => {
+      let monthlyAverageDinner = (_lodash.sumBy(this.state.data, (d) => {
         return d.dinner
       }) /5 /12).toFixed(2)
 
-      let monthlyAverageLunch = Math.round(_lodash.sumBy(this.state.data, (d) => {
+      let monthlyAverageLunch = (_lodash.sumBy(this.state.data, (d) => {
         return d.lunch
       }) /5 /12).toFixed(2)
 
-     let monthlyAverageBreakfast = Math.round(_lodash.sumBy(this.state.data, (d) => {
+     let monthlyAverageBreakfast = (_lodash.sumBy(this.state.data, (d) => {
         return d.breakfast
       }) /5 /12).toFixed(2)
 
-      let monthlyAverageSnack = Math.round(_lodash.sumBy(this.state.data, (d) => {
+      let monthlyAverageSnack = (_lodash.sumBy(this.state.data, (d) => {
         return d.snack
       }) /5 /12).toFixed(2)
 
-      let monthlyAverageCoffee = Math.round(_lodash.sumBy(this.state.data, (d) => {
+      let monthlyAverageCoffee = (_lodash.sumBy(this.state.data, (d) => {
         return d.coffee
       }) /5 /12).toFixed(2)
 
@@ -243,7 +243,7 @@ export default class App extends Component {
      dailyToMonlyData() {
       // 1) Get all the unique dates
       // This returns the first unique entry, by date. Helpful, but
-      // not what we need.
+      // not what we need....so move onto step 2)
        let uniqueDates = _lodash.uniqBy(this.state.data, (entry) => {
          return entry.date
        })
@@ -253,7 +253,7 @@ export default class App extends Component {
         return entry.date
        })
 
-      // 3) map over uniqueDates array to return the data we want
+      // 3) Map over uniqueDates array to return the data we want
       const newData = _lodash.map(uniqueDates, (date) => {
 
           let uniqueDates = _lodash.filter(this.state.data, (entry) => {
@@ -339,12 +339,11 @@ export default class App extends Component {
     // ==================================
      drawChart() {
       // select the <svg> element in the HTML file with d3 select
-      // const svg = d3.select("svg")
       const svg = d3.select("#chart")
       const sidebarSVG = d3.select("#legend-sidebar")
 
       // define margins for some nice padding on the chart
-      const margin = {top: 40, right: 10, bottom: 45, left: 20};
+      const margin = {top: 40, right: 50, bottom: 45, left: 70};
       const width = svg.attr('width')
       const height = svg.attr('height')
       const innerWidth = width - margin.left - margin.right;
@@ -353,8 +352,6 @@ export default class App extends Component {
       const chart = svg.append("g")
                    .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-      // const colors = ["#bf8b85","#5D5F71", "#634b66", "#9590a8", "#bbcbcb","#820933"]
-      // const colors = ["#B2E2A5","#DABECA", "#BF8B85", "#DE6B48", "#7F829B","#820933"]
       // const colors = ["#820933","#F79F79", "#F7D08A", "#E3F09B", "#87B6A7","#5B5941"]
       // const colors = ["#6F75AA","#820933", "#48DBDB", "#AA3E98", "#70a5a3","#ef6839"]
       const colors = ["#6F75AA","#F79F79", "#E3F09B", "#AA3E98", "#70a5a3","#E85D75"]
@@ -384,8 +381,8 @@ export default class App extends Component {
                     .attr("class", "tool-tip");
 
     // ==================================
-    // Colors!
-    // See colors & spendingType variables at top of drawChart
+    // Colors
+    // See colors & spendingType variables close to the top of drawChart
     // ==================================
     let colorBars = d3.scaleOrdinal()
                       .domain(spendingType)
@@ -501,8 +498,8 @@ export default class App extends Component {
                .style("display", "inline-block")
                .html(`
                  <h3>${d.data.date}</h3>
-                 $${Math.round(d[1] - d[0]).toFixed(2)}</br>
-                 Monthly Total All Types: $${Math.round(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
+                 <h4>$${(d[1] - d[0]).toFixed(2)}</h4>
+                 <p>Monthly Spending Total: $${(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
                  <hr/>
                  <p id="comment">${d.data.comment}</p>
                  `)
@@ -528,14 +525,14 @@ export default class App extends Component {
          // adjust up and down
          .attr('x', -(innerHeight / 1.5) )
          // adjust side to side
-         .attr('y', -25 )
+         .attr('y', 30 )
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
          .text('US dollars adjusted for inflation')
 
 
     // ==================================
-    // Legend
+    // Legend in sidebar
     // ==================================
       let legend = sidebarSVG.selectAll("#legend-sidebar")
         .data(colors)

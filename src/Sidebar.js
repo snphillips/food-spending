@@ -37,8 +37,15 @@ export default class Sidebar extends Component {
             <li>coffee out: ${this.props.monthlyAverageCoffee}</li>
           </ul>
 
+          <hr/>
+
       </aside>
     );
   }
 }
-        // <p className="sidebar-text">Visualizing how much money I've spent on food over the past five years.</p>
+
+          // <h2 className="sidebar-section-header">About</h2>
+          // <p className="sidebar-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer scelerisque ex turpis,
+          //  ac lacinia massa venenatis eu. Sed et ligula commodo, sollicitudin massa eu, sodales dolor.
+          //  Sed imperdiet felis eget consequat blandit. Mauris id tortor eget sapien dapibus vulputate.
+          //  Mauris tincidunt nec sapien eu elementum.</p>
