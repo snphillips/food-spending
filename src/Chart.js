@@ -7,9 +7,9 @@ export default class Chart extends Component {
     return (
 
       <svg id="chart"
-           viewBox=" 0 0 900 550"
+           viewBox=" 0 0 900 500"
            width="900"
-           height="550">
+           height="500">
       </svg>
 
     );
