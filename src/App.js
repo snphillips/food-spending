@@ -32,8 +32,6 @@ export default class App extends Component {
   //  "this" binding
   //  ==================================
 
-
-
   }
 
    // ********************************
@@ -44,7 +42,6 @@ export default class App extends Component {
     this.getData()
     this.drawChart()
    }
-
 
     //  ==================================
     //  Get the data
@@ -147,12 +144,12 @@ export default class App extends Component {
         monthlyAverageCoffee: monthlyAverageCoffee,
       })
 
-      console.log("monthlyAverageGroceries", this.state.monthlyAverageGroceries)
-      console.log("monthlyAverageDinner", this.state.monthlyAverageDinner)
-      console.log("monthlyAverageLunch", this.state.monthlyAverageLunch)
-      console.log("monthlyAverageBreakfast", this.state.monthlyAverageBreakfast)
-      console.log("monthlyAverageSnack", this.state.monthlyAverageSnack)
-      console.log("monthlyAverageCoffee", this.state.monthlyAverageCoffee)
+      // console.log("monthlyAverageGroceries", this.state.monthlyAverageGroceries)
+      // console.log("monthlyAverageDinner", this.state.monthlyAverageDinner)
+      // console.log("monthlyAverageLunch", this.state.monthlyAverageLunch)
+      // console.log("monthlyAverageBreakfast", this.state.monthlyAverageBreakfast)
+      // console.log("monthlyAverageSnack", this.state.monthlyAverageSnack)
+      // console.log("monthlyAverageCoffee", this.state.monthlyAverageCoffee)
 
     }
 
@@ -164,12 +161,10 @@ export default class App extends Component {
       this.state.data.forEach( (entry) => {
         entry.date = moment(entry.date).format("MMM YYYY");
       })
-      // console.log("after adjust date", this.state.data)
 
       this.state.commentData.forEach( (entry) => {
         entry.date = moment(entry.date).format("MMM YYYY");
       })
-      console.log("after adjust date commentData", this.state.commentData)
     }
 
 
@@ -208,7 +203,6 @@ export default class App extends Component {
       })
     }
 
-
     // ==================================
     // Adding key:value for different types of food spending
     // groceries, dinner out, lunch out, snack out, coffee out
@@ -237,7 +231,6 @@ export default class App extends Component {
      }
 
 
-
   // ==================================
   // The source data is daily, but we
   // want monthly totals.
@@ -262,10 +255,6 @@ export default class App extends Component {
           let uniqueDates = _lodash.filter(this.state.data, (entry) => {
             return entry.date === date
           })
-
-         // let spendingType = _lodash.filter(this.state.data, (entry) => {
-         //    return entry.type
-         //  })
 
           // sum the groceries according to every unique date
           let groceries = _lodash.sumBy(uniqueDates, (entry) => {
@@ -327,7 +316,6 @@ export default class App extends Component {
         entry.comment = tempResult[0].comment
     });
   }
-
 
 
 
@@ -518,20 +506,19 @@ export default class App extends Component {
         }
 
         tooltip
-         .style("left", d3.event.pageX - 310 + "px")
-         .style("top", d3.event.pageY - 50 + "px")
-         .style("display", "inline-block")
-         .html(`
-           <h3>${d.data.date}</h3>
-           <h4>$${(d[1] - d[0]).toFixed(2)}</h4>
-           <p>Total Monthly Spending: $${this.state.totalMonthlySpendingThisMonth}</br>
+          // .attr("class", "tooltip")
+          .style("display", "inline-block")
+          .style("left", d3.event.pageX - 310 + "px")
+          .style("top", d3.event.pageY - 50 + "px")
+          .html(`
+            <h3>${d.data.date}</h3>
+            <h4>$${(d[1] - d[0]).toFixed(2)}</h4>
+            <p>Total Monthly Spending: $${this.state.totalMonthlySpendingThisMonth}</br>
 
-           This month had ${this.state.averagePercentHigerOrLower}% ${this.state.higherOrLower} average monthly spending.
-           <hr/>
-           <p id="comment">${d.data.comment}</p>
-           `)
-
-
+            This month had ${this.state.averagePercentHigerOrLower}% ${this.state.higherOrLower} average monthly spending.
+            <hr/>
+            <p id="comment">${d.data.comment}</p>
+          `)
 
       })
 
@@ -570,7 +557,6 @@ export default class App extends Component {
       // the tiny color swatches
       legend.append("rect")
         .attr("x", 0)
-        // .attr("x", innerWidth - 18)
         .attr("width", 14)
         .attr("height", 14)
         .style("fill", (d, index) => {

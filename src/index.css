@@ -26,7 +26,7 @@ a:hover {
 /* =================================
 Sidebar
 ==================================== */
-.sidebar {
+aside {
   height: 100vh;
   top: 0;
   left: 0;
@@ -153,11 +153,18 @@ footer {
 
 
 /* SMALL ********************/
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
 
-  .sidebar {
-    padding: 1.5rem 3rem 0 3rem;
-}
+  body {
+    background-color: #1a1a1a;
+  }
+
+  aside {
+    /*display: inline-block;*/
+    height: 100%;
+    padding: 1.5rem 2.5rem 0 2.5rem;
+    /*font-size: 110%;*/
+  }
 
   h1#header {
     font-size: 180%;
@@ -166,8 +173,15 @@ footer {
   }
 
   h2 {
-    font-size: 150%;
+    font-size: 140%;
     text-align: center;
+  }
+
+  /* not working */
+  .tool-tip {
+    /*display: inline;*/
+    left: 0;
+    left: 0;
   }
 
 
