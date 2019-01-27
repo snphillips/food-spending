@@ -35,13 +35,13 @@ Sidebar
   background-color: #1a1a1a;
 }
 
- h1#header {
-   font-size: 150%;
-   margin: 0 0 1.5rem 0;
-   font-family: 'Staatliches', sans-serif;
-   color: #ffffff;
-   text-shadow: 4px 3px 0px #7A7A7A;
- }
+h1#header {
+  font-size: 150%;
+  margin: 0 0 1.5rem 0;
+  font-family: 'Staatliches', sans-serif;
+  color: #ffffff;
+  text-shadow: 4px 3px 0px #7A7A7A;
+}
 
 svg#legend-sidebar {
 
@@ -70,18 +70,14 @@ hr {
 
 ul {
   font-size: 100%;
-  /*list-style-position: inside;*/
   margin-left: 0;
   padding-left: 1rem;
-  /*list-style-type: none;*/
 }
 
 li {
   line-height: 1rem;
   padding-left: 0;
 }
-
-
 
 
 /* ===================================
@@ -92,9 +88,7 @@ svg#chart {
   /* see svg with viewBox in Chart.js */
   height: 100%;
   width: 100%;
-  /*max-width: 1500px;*/
   padding: 0 0 2rem 0;
-  /*border: 1px solid red;*/
 }
 
 .axis--x path {
@@ -106,7 +100,7 @@ svg#chart {
 }
 
 .grid path {
-      /*stroke-width: 0;*/
+  /*stroke-width: 0;*/
 }
 
 .x-scale {
@@ -124,7 +118,7 @@ Chart Tooltip
 .tool-tip {
   font-size: 90%;
   position: absolute;
-  background-color: rgba(0, 0, 0, .85);
+  background-color: rgba(0, 0, 0, .95);
   /*border-radius: 5px;*/
   border: 1px solid rgba(255, 255, 255, .20);
   padding: 14px;
@@ -156,3 +150,29 @@ footer {
   right: 2rem;
   bottom: .5rem;
 }
+
+
+/* SMALL ********************/
+@media screen and (max-width: 600px) {
+
+  .sidebar {
+    padding: 1.5rem 3rem 0 3rem;
+}
+
+  h1#header {
+    font-size: 180%;
+    text-align: center;
+    /*margin: 0 0 1.5rem 0;*/
+  }
+
+  h2 {
+    font-size: 150%;
+    text-align: center;
+  }
+
+
+
+}
+
+
+

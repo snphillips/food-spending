@@ -490,47 +490,49 @@ export default class App extends Component {
     // ==================================
       .on("mousemove", (d) => {
 
-      let totalMonthlySpendingThisMonth = (d.data.groceries + d.data.dinner + d.data.lunch
-        + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)
-      this.setState({totalMonthlySpendingThisMonth: totalMonthlySpendingThisMonth})
+        // figuring out THIS month's total spending
+        let totalMonthlySpendingThisMonth = (d.data.groceries + d.data.dinner + d.data.lunch
+          + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)
+        this.setState({totalMonthlySpendingThisMonth: totalMonthlySpendingThisMonth})
 
-      // let averagePercentHigerOrLower = ((this.state.totalMonthlySpendingThisMonth/this.state.monthlyAverageTotal) * 100).toFixed(0)
-      let averagePercentHigerOrLower = Math.abs(
-        ((this.state.totalMonthlySpendingThisMonth - this.state.monthlyAverageTotal)/
-        this.state.monthlyAverageTotal * 100).toFixed(0)
-      )
+        // Figuring out the percent that this month's spending is higher or lower than average
+        // Math.abs makes negative numbers positive
+        let averagePercentHigerOrLower = Math.abs(
+          ((this.state.totalMonthlySpendingThisMonth - this.state.monthlyAverageTotal)/
+          this.state.monthlyAverageTotal * 100).toFixed(0)
+        )
+        this.setState({averagePercentHigerOrLower: averagePercentHigerOrLower})
+
+        // This changes the wording of the tooltip language
+        if (this.state.totalMonthlySpendingThisMonth > this.state.monthlyAverageTotal) {
+          this.setState({higherOrLower:'higher than'})
+          console.log(this.state.higherOrLower)
+
+        } else if (this.state.totalMonthlySpendingThisMonth < this.state.monthlyAverageTotal) {
+          this.setState({higherOrLower:'lower than'})
+          console.log(this.state.higherOrLower)
+
+        } else {
+          this.setState({higherOrLower:'equal to'})
+          console.log(this.state.higherOrLower)
+        }
+
+        tooltip
+         .style("left", d3.event.pageX - 310 + "px")
+         .style("top", d3.event.pageY - 50 + "px")
+         .style("display", "inline-block")
+         .html(`
+           <h3>${d.data.date}</h3>
+           <h4>$${(d[1] - d[0]).toFixed(2)}</h4>
+           <p>Total Monthly Spending: $${this.state.totalMonthlySpendingThisMonth}</br>
+
+           This month had ${this.state.averagePercentHigerOrLower}% ${this.state.higherOrLower} average monthly spending.
+           <hr/>
+           <p id="comment">${d.data.comment}</p>
+           `)
 
 
-      this.setState({averagePercentHigerOrLower: averagePercentHigerOrLower})
-      console.log("this month:", this.state.totalMonthlySpendingThisMonth, "monthly average:", this.state.monthlyAverageTotal)
 
-
-      if (this.state.totalMonthlySpendingThisMonth > this.state.monthlyAverageTotal) {
-        this.setState({higherOrLower:'higher'})
-        console.log(this.state.higherOrLower)
-
-      } else if (this.state.totalMonthlySpendingThisMonth < this.state.monthlyAverageTotal) {
-        this.setState({higherOrLower:'lower'})
-        console.log(this.state.higherOrLower)
-
-      } else {
-        this.setState({higherOrLower:'equal to'})
-        console.log(this.state.higherOrLower)
-      }
-
-      tooltip
-             .style("left", d3.event.pageX - 310 + "px")
-             .style("top", d3.event.pageY - 50 + "px")
-             .style("display", "inline-block")
-             .html(`
-               <h3>${d.data.date}</h3>
-               <h4>$${(d[1] - d[0]).toFixed(2)}</h4>
-               <p>Total Monthly Spending: $${this.state.totalMonthlySpendingThisMonth}</br>
-
-               This is ${this.state.averagePercentHigerOrLower}% ${this.state.higherOrLower} than average monthly spending.
-               <hr/>
-               <p id="comment">${d.data.comment}</p>
-               `)
       })
 
     // ==================================
@@ -541,7 +543,7 @@ export default class App extends Component {
 
     // ==================================
     // Adding the left side label
-    // (no label needed on bottom...too obvious)
+    // (no label needed on bottom)
     // ==================================
     // left side label
       svg.append('text')
