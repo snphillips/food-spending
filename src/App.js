@@ -5,6 +5,7 @@ import moment from 'moment';
 import data from './data/data.csv';
 import comments from './data/comments.csv';
 import Chart from './Chart';
+import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 
@@ -589,7 +590,8 @@ export default class App extends Component {
     return (
       <div className="App row">
 
-        <div className="sidebar-container col-xs-12 col-sm-12 col-md-3 col-lg-2 col-xl-2">
+        <div className="sidebar-container col-xs-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">
+
           <Sidebar yearlyAverageTotal={this.state.yearlyAverageTotal}
                    monthlyAverageTotal={this.state.monthlyAverageTotal}
                    monthlyAverageGroceries={this.state.monthlyAverageGroceries}
@@ -601,7 +603,7 @@ export default class App extends Component {
           />
         </div>
 
-        <div className="chart-container col-xs-12 col-sm-12 col-md-9 col-lg-10 col-xl-10">
+        <div className="chart-container col-xs-12 col-sm-9 col-md-9 col-lg-10 col-xl-10">
           <Chart />
           <br/>
           <Footer />

@@ -7,7 +7,8 @@ export default class Sidebar extends Component {
     return (
 
       <aside className="sidebar">
-        <Header/>
+
+          <Header/>
 
           <hr/>
 
