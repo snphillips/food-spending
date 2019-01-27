@@ -22,7 +22,10 @@ export default class App extends Component {
       monthlyAverageLunch: '',
       monthlyAverageBreakfast: '',
       monthlyAverageSnack: '',
-      monthlyAverageCoffee: ''
+      monthlyAverageCoffee: '',
+      totalMonthlySpendingThisMonth: '',
+      averagePercentHigerOrLower: '',
+      higherOrLower: '',
     }
 
   //  ==================================
@@ -352,8 +355,7 @@ export default class App extends Component {
       const chart = svg.append("g")
                    .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-      // const colors = ["#820933","#F79F79", "#F7D08A", "#E3F09B", "#87B6A7","#5B5941"]
-      // const colors = ["#6F75AA","#820933", "#48DBDB", "#AA3E98", "#70a5a3","#ef6839"]
+      // const colors = ["#6F75AA","#F79F79", "#AA3E98", "#E3F09B", "#70a5a3","#E85D75"]
       const colors = ["#6F75AA","#F79F79", "#E3F09B", "#AA3E98", "#70a5a3","#E85D75"]
       const spendingType = ["groceries", "dinner", "lunch", "snack", "breakfast", "coffee"]
 
@@ -370,8 +372,6 @@ export default class App extends Component {
     // Moving forward, d3 is using "layers" as the data
     let layers = stack(this.state.data);
     console.log("layers:", layers);
-
-
 
     // ==================================
     // ToolTip
@@ -460,7 +460,6 @@ export default class App extends Component {
        })
       .attr('width', (d) => xScale.bandwidth())
 
-
     // ==================================
     // Mouseover: make transluscent
     // note: don't use an arrow function here
@@ -490,30 +489,55 @@ export default class App extends Component {
     // Tool Tip
     // ==================================
       .on("mousemove", (d) => {
-        tooltip
-               .style("left", d3.event.pageX - 310 + "px")
-               // .style("left", 315 + "px")
-               .style("top", d3.event.pageY - 50 + "px")
-               // .style("top", 50 + "px")
-               .style("display", "inline-block")
-               .html(`
-                 <h3>${d.data.date}</h3>
-                 <h4>$${(d[1] - d[0]).toFixed(2)}</h4>
-                 <p>Monthly Spending Total: $${(d.data.groceries + d.data.dinner + d.data.lunch + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)}</br>
-                 <hr/>
-                 <p id="comment">${d.data.comment}</p>
-                 `)
 
+      let totalMonthlySpendingThisMonth = (d.data.groceries + d.data.dinner + d.data.lunch
+        + d.data.breakfast + d.data.snack + d.data.coffee).toFixed(2)
+      this.setState({totalMonthlySpendingThisMonth: totalMonthlySpendingThisMonth})
+
+      // let averagePercentHigerOrLower = ((this.state.totalMonthlySpendingThisMonth/this.state.monthlyAverageTotal) * 100).toFixed(0)
+      let averagePercentHigerOrLower = Math.abs(
+        ((this.state.totalMonthlySpendingThisMonth - this.state.monthlyAverageTotal)/
+        this.state.monthlyAverageTotal * 100).toFixed(0)
+      )
+
+
+      this.setState({averagePercentHigerOrLower: averagePercentHigerOrLower})
+      console.log("this month:", this.state.totalMonthlySpendingThisMonth, "monthly average:", this.state.monthlyAverageTotal)
+
+
+      if (this.state.totalMonthlySpendingThisMonth > this.state.monthlyAverageTotal) {
+        this.setState({higherOrLower:'higher'})
+        console.log(this.state.higherOrLower)
+
+      } else if (this.state.totalMonthlySpendingThisMonth < this.state.monthlyAverageTotal) {
+        this.setState({higherOrLower:'lower'})
+        console.log(this.state.higherOrLower)
+
+      } else {
+        this.setState({higherOrLower:'equal to'})
+        console.log(this.state.higherOrLower)
+      }
+
+      tooltip
+             .style("left", d3.event.pageX - 310 + "px")
+             .style("top", d3.event.pageY - 50 + "px")
+             .style("display", "inline-block")
+             .html(`
+               <h3>${d.data.date}</h3>
+               <h4>$${(d[1] - d[0]).toFixed(2)}</h4>
+               <p>Total Monthly Spending: $${this.state.totalMonthlySpendingThisMonth}</br>
+
+               This is ${this.state.averagePercentHigerOrLower}% ${this.state.higherOrLower} than average monthly spending.
+               <hr/>
+               <p id="comment">${d.data.comment}</p>
+               `)
       })
-
-                 // element.name ${element.name}</br>
 
     // ==================================
     // Tool Tip - off
     // tool tip needs to be turned off to start
     // ==================================
       chart.on("mouseout", (d) => { tooltip.style("display", "none");})
-
 
     // ==================================
     // Adding the left side label
@@ -529,7 +553,6 @@ export default class App extends Component {
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
          .text('US dollars adjusted for inflation')
-
 
     // ==================================
     // Legend in sidebar
