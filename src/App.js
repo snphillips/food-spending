@@ -44,6 +44,7 @@ export default class App extends Component {
     this.drawChart()
    }
 
+
     //  ==================================
     //  Get the data
     //  ==================================
@@ -61,9 +62,11 @@ export default class App extends Component {
           this.dailyToMonlyData()
           this.turnUndefinedInto0()
           this.addFoodMemoryToData()
-          this.drawChart()
           this.calculateBreakdownAverages()
+          // 3) draw the chart
           console.log("this.state.data:", this.state.data)
+          this.drawChart()
+
       }).catch(function(error){
       // handle error
       })
@@ -75,13 +78,16 @@ export default class App extends Component {
     getCommentData() {
       d3.csv(comments)
         .then((comments) => {
-          // 1) set state with data
+          // 1) set state with comments data
           this.setState({commentData: comments})
           console.log("commentData", this.state.commentData)
+          this.drawChart()
       }).catch(function(error){
       // handle error
       })
     }
+
+
 
     // ==================================
     // Turn value from string to number
@@ -124,7 +130,7 @@ export default class App extends Component {
         return d.lunch
       }) /5 /12).toFixed(2)
 
-     let monthlyAverageBreakfast = (_lodash.sumBy(this.state.data, (d) => {
+      let monthlyAverageBreakfast = (_lodash.sumBy(this.state.data, (d) => {
         return d.breakfast
       }) /5 /12).toFixed(2)
 
@@ -144,14 +150,6 @@ export default class App extends Component {
         monthlyAverageSnack: monthlyAverageSnack,
         monthlyAverageCoffee: monthlyAverageCoffee,
       })
-
-      // console.log("monthlyAverageGroceries", this.state.monthlyAverageGroceries)
-      // console.log("monthlyAverageDinner", this.state.monthlyAverageDinner)
-      // console.log("monthlyAverageLunch", this.state.monthlyAverageLunch)
-      // console.log("monthlyAverageBreakfast", this.state.monthlyAverageBreakfast)
-      // console.log("monthlyAverageSnack", this.state.monthlyAverageSnack)
-      // console.log("monthlyAverageCoffee", this.state.monthlyAverageCoffee)
-
     }
 
     // ==================================
@@ -167,7 +165,6 @@ export default class App extends Component {
         entry.date = moment(entry.date).format("MMM YYYY");
       })
     }
-
 
     // ==================================
     // Adjust numbers for inflation
@@ -187,7 +184,6 @@ export default class App extends Component {
           entry.value = (entry.value * 1.028)
         }
       })
-      // console.log("after inflation", this.state.data)
     }
 
     turnUndefinedInto0() {
@@ -265,19 +261,19 @@ export default class App extends Component {
           let dinner = _lodash.sumBy(uniqueDates, (entry) => {
             return entry.dinner
           })
-
+          // sum the lunch spending according to every unique date
           let lunch = _lodash.sumBy(uniqueDates, (entry) => {
             return entry.lunch
           })
-
+          // sum the breakfast spending according to every unique date
           let breakfast = _lodash.sumBy(uniqueDates, (entry) => {
             return entry.breakfast
           })
-
+          // sum the snack spending according to every unique date
           let snack = _lodash.sumBy(uniqueDates, (entry) => {
             return entry.snack
           })
-
+          // sum the coffee spending according to every unique date
           let coffee = _lodash.sumBy(uniqueDates, (entry) => {
             return entry.coffee
           })
@@ -293,7 +289,6 @@ export default class App extends Component {
        }
       })
        this.setState({data: newData})
-       // console.log("after monthly totals:", newData)
      }
 
 
@@ -539,7 +534,7 @@ export default class App extends Component {
          // adjust up and down
          .attr('x', -(innerHeight / 1.5) )
          // adjust side to side
-         .attr('y', 30 )
+         .attr('y', 15 )
          .attr('transform', 'rotate(-90)')
          .attr('text-anchor', 'middle')
          .text('US dollars adjusted for inflation')

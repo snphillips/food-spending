@@ -19,9 +19,6 @@ a {
   text-decoration: underline;
 }
 
-a:hover {
-
-}
 
 /* =================================
 Sidebar
@@ -51,7 +48,7 @@ text.legend-text {
   font-family: sans-serif;
   font-family: 'Jaldi', sans-serif;
   /* remember, it's an SVG so use fill instead of color for text color */
-  fill: rgba(255, 255, 255, .55);
+  fill: rgba(255, 255, 255, .80);
 }
 
 .sidebar-text, .sidebar-link{
@@ -143,26 +140,25 @@ p#comment {
 /* ===================================
 Footer
 ====================================== */
-
 footer {
   font-size: 80%;
   position: absolute;
   right: 2rem;
-  bottom: .5rem;
+  bottom: 1.5rem;
 }
-
 
 /* SMALL ********************/
 @media screen and (max-width: 700px) {
 
   body {
+    padding: .5rem;
     background-color: #1a1a1a;
   }
 
   aside {
     /*display: inline-block;*/
     height: 100%;
-    padding: 1.5rem 2rem 0 2rem;
+    padding: 1.5rem 1.5rem 0 1.5rem;
     /*font-size: 110%;*/
   }
 
@@ -177,13 +173,17 @@ footer {
     text-align: center;
   }
 
-  /* not working */
-  .tool-tip {
-    /*display: inline;*/
-    left: 0;
-    left: 0;
+  svg#chart {
+    padding: .5rem 0 3rem .5rem;
   }
 
+  text.left-chart-label {
+    font-size: 220%;
+  }
+
+  g.tick {
+    font-size: 170%;
+  }
 
 
 }
