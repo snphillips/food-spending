@@ -6,6 +6,10 @@ $ surge --domain https://5yearsfood.surge.sh/
 
 
 
+To run the server: npm start
+
+
+
 
 
 

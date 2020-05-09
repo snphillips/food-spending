@@ -6,7 +6,7 @@ export default class Header extends Component {
 
       <div>
         <h1 id="header">
-          Five Years of Food Spending
+          Five Years of Food Spending & Memories
         </h1>
       </div>
 

@@ -45,8 +45,3 @@ export default class Sidebar extends Component {
   }
 }
 
-          // <h2 className="sidebar-section-header">About</h2>
-          // <p className="sidebar-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer scelerisque ex turpis,
-          //  ac lacinia massa venenatis eu. Sed et ligula commodo, sollicitudin massa eu, sodales dolor.
-          //  Sed imperdiet felis eget consequat blandit. Mauris id tortor eget sapien dapibus vulputate.
-          //  Mauris tincidunt nec sapien eu elementum.</p>

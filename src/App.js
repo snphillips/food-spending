@@ -5,7 +5,6 @@ import moment from 'moment';
 import data from './data/data.csv';
 import comments from './data/comments.csv';
 import Chart from './Chart';
-import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 
