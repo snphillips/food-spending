@@ -1,6 +1,6 @@
-# food-spending
+# 5 Years of Food Spending & Memories
 
-IN DEVELOPMENT - a data visualization of 5 years of of my own food spending.
+A data visualization of 5 years of of my own food spending.
 
 View my progress here: https://5yearsfood.surge.sh/
 
