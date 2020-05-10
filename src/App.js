@@ -584,7 +584,7 @@ export default class App extends Component {
     return (
       <div className="App row">
 
-        <div className="sidebar-container col-xs-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">
+        <section className="sidebar-container col-xs-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">
 
           <Sidebar yearlyAverageTotal={this.state.yearlyAverageTotal}
                    monthlyAverageTotal={this.state.monthlyAverageTotal}
@@ -595,14 +595,14 @@ export default class App extends Component {
                    monthlyAverageSnack={this.state.monthlyAverageSnack}
                    monthlyAverageCoffee={this.state.monthlyAverageCoffee}
           />
-        </div>
+        </section>
 
-        <div className="chart-container col-xs-12 col-sm-9 col-md-9 col-lg-10 col-xl-10">
+        <section className="chart-container col-xs-12 col-sm-9 col-md-9 col-lg-10 col-xl-10">
           <Chart />
-          <br/>
           <Footer />
-        </div>
+        </section>
       </div>
     );
   }
 }
+          // <br/>
